@@ -8,7 +8,7 @@ public class OrderBehaviourTest : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetButtonDown("U"))
+        if (Input.GetButtonDown("Action1"))
         {
             AddOrder();
         }
@@ -16,6 +16,21 @@ public class OrderBehaviourTest : MonoBehaviour
 
     void AddOrder()
     {
-
+        GameObject order = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
+        BoxController currentBox = order.GetComponent<BoxController>();
+        foreach (string key in currentBox.fields)
+        {
+            int status = Random.Range(0, 2);
+            if (status == 0)
+            {
+                currentBox.attributes[key] = false;
+            }
+            else
+            {
+                currentBox.attributes[key] = true;
+            }
+        }
+        Debug.Log("Made it here");
+        BoxOrderController.instance.Add(currentBox);
     }
 }
