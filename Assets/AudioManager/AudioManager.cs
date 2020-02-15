@@ -67,12 +67,7 @@ public class AudioManager : MonoBehaviour {
     #endregion
 
     #region Controls
-    void PLAYSPELL(SOURCES source, AudioClip clip, float volume = 1.0f, bool loop = false)
-    {
-        AudioSource audioSource = audioSources[(int)source];
-        audioSource.loop = loop;
-        audioSource.PlayOneShot(clip, volume);
-    }
+
 
 
 
