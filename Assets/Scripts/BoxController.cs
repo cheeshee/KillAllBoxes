@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    public Dictionary<string, bool> attributes;
-    public string[] fields = {"fragile", "heavy", "bubble", "wrapping"};
+    
+
+
+    [Header("Box Attributes")]
+    [SerializeField] private Dictionary<string, bool> attributes;
+    [SerializeField] private string[] fields = {"fragile", "heavy", "bubble", "wrapping"};
+    [SerializeField] public SpriteRenderer[] pattern;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         foreach (string attribute in fields)
         {
             attributes.Add(attribute, false);
         }
+
+        pattern = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    
+
+    void FixedUpdate(){
 
     }
+
 }
