@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxOrderController : MonoBehaviour
 {
-    List<BoxController> orders = new List<BoxController>;
+    List<BoxController> orders = new List<BoxController>();
     // Start is called before the first frame update
     void Start()
     {
