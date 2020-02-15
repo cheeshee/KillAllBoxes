@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxController : MonoBehaviour
 {
     public Dictionary<string, bool> attributes;
-    public string[] fields = ["fragile", "heavy", "bubble", "wrapping"];
+    public string[] fields = { "fragile", "heavy", "bubble", "wrapping" };
     // Start is called before the first frame update
     void Start()
     {
