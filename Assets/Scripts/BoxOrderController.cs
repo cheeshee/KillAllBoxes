@@ -20,12 +20,31 @@ public class BoxOrderController : MonoBehaviour
     void CheckBox(BoxController currentBox)
     {
         bool completed = true;
+        BoxController checkedOrder = null;
         foreach (BoxController order in orders)
         {
             foreach (string key in order.fields)
             {
-                if order.fields
+                if (order.attributes[key] != currentBox.attributes[key]) 
+                {
+                    completed = false;
+                    break;
+                }
             }
+            if (completed)
+            {
+                checkedOrder = order;
+                break;
+            }
+        }
+
+        if (checkedOrder != null)
+        {
+            orders.Remove(checkedOrder);
+            // play sound
+        } else
+        {
+            // Penalty for incorrect box
         }
     }
 
