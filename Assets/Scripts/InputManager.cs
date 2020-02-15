@@ -3,32 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class InputManager{
-
-    public static float MainHorizontal()
+    
+    
+    public static float GetHorizontal(int player)
     {
         float r = 0.0f;
-        r += Input.GetAxis("Joy_Horizontal");
-        r += Input.GetAxis("Key_Horizontal");
-        return Mathf.Clamp(r, -1.0f, 1.0f); //If both joystick and keyboard are being used, clamp between values
+        if(player == 1)
+            r += Input.GetAxis("Key1_Horizontal");
+        else if(player == 2)
+            r += Input.GetAxis("Key2_Horizontal");
+
+        return r;// Mathf.Clamp(r, -1.0f, 1.0f); //If both joystick and keyboard are being used, clamp between values
     }
 
-    public static float MainVertical()
+    public static float GetVertical(int player)
     {
         float r = 0.0f;
-        r += Input.GetAxis("Joy_Vertical");
-        r += Input.GetAxis("Key_Vertical");
-        return Mathf.Clamp(r, -1.0f, 1.0f);
+        if(player == 1)
+            r += Input.GetAxis("Key1_Vertical");
+        else if(player == 2)
+            r += Input.GetAxis("Key2_Vertical");
+            
+        return r; // Mathf.Clamp(r, -1.0f, 1.0f);
     }
 
-    public static Vector3 MainInput()
+    public static Vector3 MainInput(int player)
     {
-        return new Vector3(MainHorizontal(), MainVertical(), 0.0f );
+        return new Vector3(GetVertical(player), GetHorizontal(player), 0.0f );
     }
 
-    public static bool isFiring()
+    public static bool isInteracting(int player)
     {
-        return Input.GetButton("Fire");
+        if(player == 1)
+            return Input.GetButton("Action1");
+        else if(player == 2)
+            return Input.GetButton("Action2");           
+        else    
+            return false;
     }
+    
+
 
 
 }
