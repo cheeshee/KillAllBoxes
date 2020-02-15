@@ -30,28 +30,5 @@ public static class InputManager{
         return Input.GetButton("Fire");
     }
 
-    public static bool skillOnePressed()
-    {
-        return Input.GetButtonDown("SkillOne");
-    }
 
-    public static bool skillTwoPressed()
-    {
-        return Input.GetButton("SkillTwo");
-    }
-
-    public static bool skillThreePressed()
-    {
-        return Input.GetButtonDown("SkillThree");
-    }
-
-    public static bool skillFourPressed()
-    {
-        return Input.GetButtonDown("SkillFour");
-    }
-
-    public static bool isCastingSpell()
-    {
-        return isFiring() || skillOnePressed() || skillTwoPressed() || skillFourPressed();
-    }
 }
