@@ -12,7 +12,7 @@ public class PlayerController : PhysicsObject
     [SerializeField]
     protected float jumpTakeOffSpeed;
     [SerializeField]
-    protected float playerNumber = 1;
+    protected int playerNumber = 1;
     [SerializeField]
     protected float maxSpeed = 1;
 
@@ -28,18 +28,9 @@ public class PlayerController : PhysicsObject
     protected override void ComputeVelocity()
     {
         move = Vector2.zero;
-
-
-
-
-    move.x = InputManager.GetHorizontal( playerNumber);
-
-
-
-
-
-    targetVelocity = move * maxSpeed;
+        move.x = InputManager.GetHorizontal(playerNumber);
+        targetVelocity = move * maxSpeed;
+    }
 
    
-
 }
