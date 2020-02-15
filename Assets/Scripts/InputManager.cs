@@ -41,7 +41,17 @@ public static class InputManager{
         else    
             return false;
     }
-
+    
+    public static bool IsShipping(int player)
+    {
+        if (player == 1)
+            return Input.GetButton("Ship1");
+        else if (player == 2)
+            return Input.GetButton("Ship2");
+        else
+            return false;
+    }
+    
     public static bool GetButtonUp(int player) {
         if (player == 1)
             return Input.GetButton("Up1");

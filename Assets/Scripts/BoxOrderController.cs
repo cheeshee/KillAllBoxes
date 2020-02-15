@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class BoxOrderController : MonoBehaviour
 {
-    List<BoxController> orders = new List<BoxController>();
+    public List<BoxController> orders = new List<BoxController>();
     // Start is called before the first frame update
-    void Start()
+
+    #region Singleton
+    public static BoxOrderController instance;
+
+    void Awake ()
     {
-
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one order form, not good.");
+            return;
+        }
+        instance = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    #endregion
 
     void CheckBox(BoxController currentBox)
     {
@@ -46,6 +50,16 @@ public class BoxOrderController : MonoBehaviour
         {
             // Penalty for incorrect box
         }
+    }
+
+    public void Remove (BoxController box )
+    {
+        orders.Remove(box);
+    }
+
+    public void Add (BoxController box)
+    {
+        orders.Add(box);
     }
 
     void GenerateOrder()

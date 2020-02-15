@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 796893086}
   - component: {fileID: 796893087}
   m_Layer: 0
-  m_Name: Sprite1
+  m_Name: Fragile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 992089288}
   - component: {fileID: 992089289}
   m_Layer: 0
-  m_Name: Sprite4
+  m_Name: Wrapping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 1010601248}
   - component: {fileID: 1010601249}
   m_Layer: 0
-  m_Name: Sprite3
+  m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 1514981607}
   - component: {fileID: 1514981608}
   m_Layer: 0
-  m_Name: Sprite2
+  m_Name: Heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,6 +831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1937806075}
   - component: {fileID: 1937806074}
+  - component: {fileID: 1937806076}
   m_Layer: 0
   m_Name: PlaceHolder_Box
   m_TagString: Untagged
@@ -904,3 +905,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1937806076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937806073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1079902a1ce4581322635151160f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields:
+  - fragile
+  - heavy
+  - bubble
+  - wrapping
