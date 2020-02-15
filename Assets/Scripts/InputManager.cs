@@ -32,7 +32,7 @@ public static class InputManager{
         return new Vector3(GetVertical(player), GetHorizontal(player), 0.0f );
     }
 
-    public static bool isInteracting(int player)
+    public static bool IsInteracting(int player)
     {
         if(player == 1)
             return Input.GetButton("Action1");
@@ -41,8 +41,15 @@ public static class InputManager{
         else    
             return false;
     }
-    
 
+    public static bool GetButtonUp(int player) {
+        if (player == 1)
+            return Input.GetButton("Up1");
+        else if (player == 2)
+            return Input.GetButton("Up2");
+        else
+            return false;
+    }
 
 
 }
