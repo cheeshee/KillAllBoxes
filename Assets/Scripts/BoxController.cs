@@ -8,7 +8,7 @@ public class BoxController : MonoBehaviour
     [Header("Box Attributes")]
     [SerializeField] private Dictionary<string, bool> attributes;
     [SerializeField] private string[] fields = {"fragile", "heavy", "bubble", "wrapping"};
-    [SerializeField] public transform[] pattern;
+    [SerializeField] public SpriteRenderer[] pattern;
     // Start is called before the first frame update
     void Awake()
     {
@@ -17,7 +17,7 @@ public class BoxController : MonoBehaviour
             attributes.Add(attribute, false);
         }
 
-        pattern = gameObject.GetComponentsInChildren<transform>();
+        pattern = gameObject.GetComponentsInChildren<SpriteRenderer>();
         
     }
 
@@ -29,7 +29,21 @@ public class BoxController : MonoBehaviour
 
     void Change_Active(){
 
-    
+        foreach(SpriteRenderer in pattern){
+
+            if(attribute(pattern.gameObject.name) == false){
+
+                pattern.enabled(false);
+
+            }
+            else if{
+
+                pattern.enabled(true);
+
+            }
+
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D col){
