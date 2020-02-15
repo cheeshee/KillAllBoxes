@@ -11,7 +11,10 @@ public class PlayerController : PhysicsObject
 
     [SerializeField]
     protected float jumpTakeOffSpeed;
-
+    [SerializeField]
+    protected float playerNumber = 1;
+    [SerializeField]
+    protected float maxSpeed = 1;
 
 
 
@@ -29,21 +32,7 @@ public class PlayerController : PhysicsObject
 
 
 
-    move.x = InputManager.MainHorizontal();
-
-    if (InputManager.GetButtonDown("Jump") && isGrounded) //checks if jump button is pressed while grounded
-    {
-        velocity.y = jumpTakeOffSpeed;
-    }
-
-    else if (Input.GetButtonUp("Jump")) // reduces velocity when user lets go of jump button
-    {
-        if (velocity.y > 0)
-            velocity.y = velocity.y * 0.5f;
-    }
-
-    // detect dash
-
+    move.x = InputManager.GetHorizontal( playerNumber);
 
 
 
