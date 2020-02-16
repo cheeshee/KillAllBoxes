@@ -7,8 +7,8 @@ public class BoxController : PhysicsObject, IPooledObject
 
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = {"blueSticker", "redSticker", "whiteSticker",
-                              "bubbleWrap", "xRay"}; //test for push
+    public string[] fields = {"stickerBlue", "stickerRed", "stickerWhite",
+                              "bubbleWrap"}; //test for push
     // Start is called before the first frame update
     public bool isHeavy = false;
     public bool isFragile = false;
@@ -30,21 +30,23 @@ public class BoxController : PhysicsObject, IPooledObject
 
         OnObjectSpawn();
 
-        foreach(Transform child in transform){
+        pattern = GetComponentsInChildren<SpriteRenderer>();
 
-            if(child.gameObject.name == "Wrapper"){
+        //foreach(Transform child in transform){
 
-                pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
-                continue;
+        //    if(child.gameObject.name == "Wrapper"){
 
-            }
-            for(int i = 0; i < 3; i++){
+        //        pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
+        //        continue;
 
-                pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
+        //    }
+        //    for(int i = 0; i < 3; i++){
 
-            }
+        //        pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
 
-        }
+        //    }
+
+        //}
 
         foreach(SpriteRenderer sprite in pattern){
 
@@ -67,13 +69,10 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("EnteredChute");
         string spriteApply = col.gameObject.name;
-        
         if (col.tag == Tags.WRAPPING)
         {
             
-            attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(false, spriteApply);
 
@@ -82,7 +81,6 @@ public class BoxController : PhysicsObject, IPooledObject
         if (col.tag == Tags.STICKER)
         {
 
-            attributes["sticker"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(true, spriteApply);
 
@@ -91,7 +89,6 @@ public class BoxController : PhysicsObject, IPooledObject
 
         if (col.tag == Tags.CHUTE)
         {
-            Debug.Log("EnteredChute");
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
         }
@@ -160,19 +157,31 @@ public class BoxController : PhysicsObject, IPooledObject
 
         List<string> keys = new List<string>(attributes.Keys);
 
-        foreach (string key in keys)
+
+        Debug.Log("Currently updating " + spriteApply);
+
+        switch (spriteApply)
         {
-
-            attributes[key] = false;
-
-            if (key == spriteApply)
-            {
-
-                attributes[key] = true;
-
-            }
+            case "stickerBlue":
+                attributes["stickerRed"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerRed":
+                attributes["stickerBlue"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerWhite":
+                attributes["stickerRed"] = false;
+                attributes["stickerBlue"] = false;
+                break;
+            case "bubbleWrap":
+                break;
+            default:
+                break;
 
         }
+        attributes[spriteApply] = true;
+        Debug.Log(spriteApply + " is " + attributes[spriteApply]);
 
     }
 }

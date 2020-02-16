@@ -15,6 +15,16 @@ public class OrderSlotController : MonoBehaviour
 
     public void AddOrder(BoxController newOrder)
     {
+        if (newOrder == null)
+        {
+            selfImage.color = new Color(selfImage.color.r, selfImage.color.g, selfImage.color.b, 0f);
+            selfImage.sprite = normal;
+            blue.gameObject.SetActive(false);
+            red.gameObject.SetActive(false);
+            white.gameObject.SetActive(false);
+            bubble.gameObject.SetActive(false);
+            return;
+        }
         box = newOrder;
         //Debug.Log(box.attributes["fragile"]);
 
@@ -34,20 +44,35 @@ public class OrderSlotController : MonoBehaviour
         if (box.attributes["bubbleWrap"] == true)
         {
             bubble.gameObject.SetActive(true);
+        } else
+        {
+            bubble.gameObject.SetActive(false);
         }
 
-        if (box.attributes["blueSticker"] == true)
+        if (box.attributes["stickerBlue"] == true)
         {
             // Debug.Log("wrap");
             blue.gameObject.SetActive(true);
         }
-        if (box.attributes["redSticker"] == true)
+        else
+        {
+            blue.gameObject.SetActive(false);
+        }
+        if (box.attributes["stickerRed"] == true)
         {
             red.gameObject.SetActive(true);
         }
-        if (box.attributes["whiteSticker"] == true)
+        else
+        {
+            red.gameObject.SetActive(false);
+        }
+        if (box.attributes["stickerWhite"] == true)
         {
             white.gameObject.SetActive(true);
+        }
+        else
+        {
+            white.gameObject.SetActive(false);
         }
     }
 

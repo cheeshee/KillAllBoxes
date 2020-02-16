@@ -30,6 +30,9 @@ public class OrderUI : MonoBehaviour
             if (i < boxorders.orders.Count)
             {
                 orderSlots[i].AddOrder(boxorders.orders[i]);
+            } else
+            {
+                orderSlots[i].AddOrder(null);
             }
         }
     }

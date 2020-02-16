@@ -304,8 +304,10 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   initialGravityModifier: 1
   fields:
-  - blueSticker
-  - redSticker
-  - whiteSticker
+  - stickerBlue
+  - stickerRed
+  - stickerWhite
   - bubbleWrap
+  isHeavy: 0
+  isFragile: 0
   pattern: []
