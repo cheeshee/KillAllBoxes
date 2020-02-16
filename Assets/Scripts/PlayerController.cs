@@ -129,7 +129,7 @@ public class PlayerController : PhysicsObject
 
     private void checkBoxInRange() {
         BoxController[] boxes = FindObjectsOfType<BoxController>();
-        if (boxes.Length > 0) {
+        if (boxes.Length > 0 && !holding) {
             boxInst = boxes[0];
         
             for (int i = 1; i < boxes.Length; i++) {
