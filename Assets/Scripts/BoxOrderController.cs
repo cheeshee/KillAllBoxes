@@ -10,6 +10,7 @@ public class BoxOrderController : MonoBehaviour
 
 
     public List<BoxController> orders = new List<BoxController>();
+     
     // Start is called before the first frame update
 
     #region Singleton
@@ -32,6 +33,8 @@ public class BoxOrderController : MonoBehaviour
 
     public void CheckBox(BoxController currentBox)
     {
+        
+        GameObject.Find("Chute").GetComponent<Animator>().SetTrigger("eatPackage");
         Debug.Log(currentBox.attributes);
         BoxController correctOrder = null;
         bool completed = true;
