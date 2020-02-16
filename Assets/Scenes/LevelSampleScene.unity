@@ -1541,6 +1541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chute
       objectReference: {fileID: 0}
+    - target: {fileID: 2680075251543462174, guid: 653a99c6b5fbe2247906d1889333dde3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Chute
+      objectReference: {fileID: 0}
     - target: {fileID: 2680075251543462168, guid: 653a99c6b5fbe2247906d1889333dde3,
         type: 3}
       propertyPath: m_LocalPosition.x
