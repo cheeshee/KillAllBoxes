@@ -12,7 +12,7 @@ public class BoxController : PhysicsObject, IPooledObject
     // Start is called before the first frame update
     public bool isHeavy = false;
     public bool isFragile = false;
-    [SerializeField] private SpriteRenderer[] pattern;
+    [SerializeField] private List<SpriteRenderer> pattern;   
 
 
     public virtual void OnObjectSpawn()
@@ -29,7 +29,21 @@ public class BoxController : PhysicsObject, IPooledObject
 
         OnObjectSpawn();
 
-        pattern = GetComponentsInChildren<SpriteRenderer>();
+        foreach(Transform child in transform){
+
+            if(child.gameObject.name == "Wrapper"){
+
+                pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
+                continue;
+
+            }
+            for(int i = 0; i < 3; i++){
+
+                pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
+
+            }
+
+        }
 
     }
 
@@ -43,12 +57,12 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerStay2D(Collider2D col)
     {
-            Debug.Log("EnteredChute");
-            string spriteApply = col.gameObject.name;
+        Debug.Log("EnteredChute");
+        string spriteApply = col.gameObject.name;
+        
         if (col.tag == Tags.WRAPPING)
         {
             
-
             attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(2, false, spriteApply);
@@ -87,8 +101,10 @@ public class BoxController : PhysicsObject, IPooledObject
     {
         
         // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
-        pattern[index].enabled = true;
+        //pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
+        //pattern[index].enabled = true;
+
+
 
     }
 
