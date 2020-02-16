@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SpawnController : MonoBehaviour
 {
 
@@ -76,6 +77,14 @@ public class SpawnController : MonoBehaviour
 
             lastSpawnedBoxTime = Time.time;
         }
+
+        /* Restart Code
+        using UnityEngine.SceneManagement;
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        */
     }
 
     void BoxOnDeath()
