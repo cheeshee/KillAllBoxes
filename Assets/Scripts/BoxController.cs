@@ -37,16 +37,16 @@ public class BoxController : PhysicsObject, IPooledObject
     {
         Debug.Log("Entered Sticker" + col.collider.tag);
 
-        string spriteApply = col.gameObject.name;
+        // string spriteApply = col.gameObject.name;
 
-        if (col.collider.tag == Tags.STICKER)
-        {
+        // if (col.collider.tag == Tags.STICKER)
+        // {
 
-            attributes["sticker"] = true;
-            Update_Attributes(spriteApply);
-            Change_Pattern(1, true, spriteApply);
+        //     attributes["sticker"] = true;
+        //     Update_Attributes(spriteApply);
+        //     Change_Pattern(1, true, spriteApply);
 
-        }
+        // }
         // if (col.collider.tag == Tags.WRAPPING)
         // {
 
@@ -61,14 +61,23 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerStay2D(Collider2D col)
     {
+            string spriteApply = col.gameObject.name;
         if (col.tag == Tags.WRAPPING)
         {
             
-            string spriteApply = col.gameObject.name;
 
             attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(2, false, spriteApply);
+
+        }
+
+        if (col.tag == Tags.STICKER)
+        {
+
+            attributes["sticker"] = true;
+            Update_Attributes(spriteApply);
+            Change_Pattern(1, true, spriteApply);
 
         }
     }
