@@ -13,8 +13,11 @@ public class BoxController : PhysicsObject, IPooledObject
     public bool isHeavy = false;
     public bool isFragile = false;
     public bool isSafe = true;
-    [SerializeField] private List<SpriteRenderer> pattern; 
+    [SerializeField] private List<SpriteRenderer> pattern;
 
+
+    public delegate void BoxDelegate();
+    public BoxDelegate onBoxDeath;
 
     public virtual void OnObjectSpawn()
     {
@@ -136,7 +139,8 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             //Debug.Log("BURN");
             //Object.Destroy(gameObject);
-            gameObject.SetActive(false);
+            onDeath();
+
         }
 
     }
@@ -167,8 +171,6 @@ public class BoxController : PhysicsObject, IPooledObject
         // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
         
         foreach(SpriteRenderer sprite in pattern){
-
-            Debug.Log("Sprite Name: " + sprite.name);
             
             if(attributes[sprite.name] == false){
                 sprite.enabled = false;
@@ -192,11 +194,21 @@ public class BoxController : PhysicsObject, IPooledObject
 
         List<string> keys = new List<string>(attributes.Keys);
 
-
-        Debug.Log("Currently updating " + spriteApply);
-
         attributes[spriteApply] = true;
-        Debug.Log(spriteApply + " is " + attributes[spriteApply]);
 
+    }
+
+
+
+
+
+
+
+
+    public virtual void onDeath()
+    {
+        onBoxDeath?.Invoke();
+        onBoxDeath = null;
+        gameObject.SetActive(false);
     }
 }
