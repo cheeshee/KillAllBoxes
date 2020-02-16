@@ -27,31 +27,28 @@ public class BoxOrderController : MonoBehaviour
 
     public void CheckBox(BoxController currentBox)
     {
-        bool completed = true;
+
         foreach (BoxController order in orders)
         {
-            completed = true;
-
             foreach (string key in order.fields)
             {
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
-                    completed = false;
+
+                    Debug.Log("Incorrect!");
+                    //Lose the game
                     break;
+                
+                }
+                else if(order.attributes[key] == currentBox.attributes[key]){
+                
+                    Debug.Log("Correct!");
+                    //Play a sound
+                    break;
+                
                 }
             }
-            if (completed)
-            {
-                Debug.Log("Correct!");
-                break;
-            }
         }
-
-        if (!completed)
-        {
-            // Penalty for incorrect box
-            Debug.Log("Incorrect!");
-        } 
     }
 
     private void Remove (BoxController box )
