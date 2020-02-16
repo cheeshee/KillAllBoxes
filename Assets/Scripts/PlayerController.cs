@@ -176,7 +176,7 @@ public class PlayerController : PhysicsObject
         {
                 boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
                 holding = true;
-                boxInst.transform.position = gameObject.transform.position;
+                boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
                 boxInst.transform.parent = gameObject.transform;
                 boxInst.GetComponent<Rigidbody2D>().simulated = false;
         }
