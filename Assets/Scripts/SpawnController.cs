@@ -17,7 +17,8 @@ public class SpawnController : MonoBehaviour
     private int bombBox;
     private BoxController boxComponent;
     private int boxCount;
-
+    [SerializeField]
+    private int maximumBoxCount = 9;
 
 
 // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class SpawnController : MonoBehaviour
     protected void Update()
     {
 
-        if (Time.time > lastSpawnedBoxTime + spawnRate)
+        if (Time.time > lastSpawnedBoxTime + spawnRate && boxCount < maximumBoxCount)
         {
             if (boxList[boxSpawnNumber] % 3 == 0)
             {
@@ -57,6 +58,7 @@ public class SpawnController : MonoBehaviour
 
             boxComponent = box.GetComponent<BoxController>();
             boxComponent.OnObjectSpawn();
+            boxComponent.onBoxDeath += BoxOnDeath;
 
             if (boxSpawnNumber == bombBox)
             {
@@ -76,12 +78,11 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-
-
-    public void decrementBoxes()
+    void BoxOnDeath()
     {
         boxCount--;
     }
+
 
 
     private void generateNewList()

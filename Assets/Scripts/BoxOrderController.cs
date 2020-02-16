@@ -63,7 +63,9 @@ public class BoxOrderController : MonoBehaviour
             }
         }
 
-        currentBox.gameObject.SetActive(false);
+        currentBox.GetComponent<BoxController>().onDeath();
+
+
 
         if (correctOrder != null)
         {
