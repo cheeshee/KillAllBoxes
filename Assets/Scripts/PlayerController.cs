@@ -17,8 +17,9 @@ public class PlayerController : PhysicsObject
     [SerializeField]
     protected int playerNumber = 1;
     [SerializeField]
-    protected float maxSpeed = 1;
-
+    protected float maxSpeed = 1.6f;
+    [SerializeField]
+    private float ladderSpeed = 3;
     protected override void Start()
     {
         base.Start();
@@ -55,7 +56,7 @@ public class PlayerController : PhysicsObject
         {
 
             Debug.Log(velocity.y);
-            velocity.y = InputManager.GetVertical(playerNumber) *5;
+            velocity.y = InputManager.GetVertical(playerNumber) * ladderSpeed;
             //isGrounded = true;
             gravityModifier = 0;
         }
