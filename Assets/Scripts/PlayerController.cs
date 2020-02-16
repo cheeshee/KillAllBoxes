@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-
+    private GameObject boxInst;
+    private bool grabBox;
 
     private bool onLadder;
     private bool grabLadder;
@@ -56,14 +57,39 @@ public class PlayerController : PhysicsObject
         }
     }
 
+    protected private void OnTriggerEnter2d(Collider2D collision) {
+        if (collision.tag == Tags.BOX)
+        {
+            boxInst = collision.gameObject;
+        }
+    }
+
     protected private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == Tags.LADDER)
         {
             onLadder = false;
         }
+        if (collision.tag == Tags.BOX)
+        {
+            boxInst = null;
+        }
 
     }
 
-
+    private void pickUpBox() {
+        if (InputManager.IsShipping(playerNumber)) {
+            if (grabBox)
+            {
+                grabBox = true;
+                boxInst.transform.parent = null;
+            }
+            else
+            {
+                grabBox = false;
+                boxInst.transform.parent = gameObject.transform;
+            }
+        }
+    }
+    
 }

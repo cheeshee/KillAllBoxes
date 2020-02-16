@@ -10,6 +10,7 @@ public class BoxController :  MonoBehaviour, IPooledObject
     // Start is called before the first frame update
 
     // Update is called once per frame
+    
     protected virtual void Update()
     {
 
@@ -23,8 +24,62 @@ public class BoxController :  MonoBehaviour, IPooledObject
             attributes.Add(attribute, false);
         }
     }
+    /*
+    void FixedUpdate(){
+
+        Change_Active();
+
+    }
+
+    void Change_Active(){
+
+        foreach(SpriteRenderer in pattern){
+
+            if(attribute(pattern.gameObject.name) == false){
+
+                pattern.enabled(false);
+
+            }
+            else if{
+
+                pattern.enabled(true);
+
+            }
+
+        }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D col){
+
+        if(col.tag == Tag.BUBBLE){
+
+            attribute("bubble", true);
+
+        }
+        if(col.tag == Tag.WRAPPING){
+
+            attribute("wrapping", true);
+
+        }
+
+    }
+
+    void OnCOllisionExit2D(Collision2D col){
+        
+        if(col.tag == Tag.BUBBLE){
+
+            attribute("bubble", false);
+
+        }
+        if(col.tag == Tag.WRAPPING){
+
+            attribute("wrapping", false);
+
+        }
 
 
-
+    }
+    */
 
 }

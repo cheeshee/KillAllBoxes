@@ -6,6 +6,7 @@ public struct Tags  {
     public static readonly string PLAYER = "Player";
     public static readonly string SOLID_OBSTACLE = "SolidObstacle";
     public static readonly string LADDER = "Ladder";
+    public static readonly string BOX = "Box";
 }
 
 public struct Pool
