@@ -72,6 +72,7 @@ public class BoxOrderController : MonoBehaviour
         } else
         {
             Debug.Log("failed");
+            GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().SetTrigger("IncorrectPackage");
         }
     }
 
