@@ -147,6 +147,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerExit2D(Collider2D col)
     {
+
         if (col.tag == Tags.XRAY)
         {
             col.transform.GetChild(0).gameObject.SetActive(false);
