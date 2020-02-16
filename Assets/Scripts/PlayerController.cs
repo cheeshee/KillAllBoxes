@@ -129,7 +129,7 @@ public class PlayerController : PhysicsObject
 
     private void checkBoxInRange() {
         BoxController[] boxes = FindObjectsOfType<BoxController>();
-        if (boxes.Length > 0) {
+        if (boxes.Length > 0 && !holding) {
             boxInst = boxes[0];
         
             for (int i = 1; i < boxes.Length; i++) {
@@ -188,11 +188,12 @@ public class PlayerController : PhysicsObject
         }
         else if(inGrabRange && !holding)
         {
+            
+			if (boxInst.transform.parent != null) {
+				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
+				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
+				boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
 
-            if (boxInst.transform.parent != null) {
-                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
-                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
-                boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
             }
 
 
