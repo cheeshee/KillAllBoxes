@@ -35,11 +35,27 @@ public class BoxController : PhysicsObject, IPooledObject
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Entered Sticker" + col.collider.tag);
+        // Debug.Log("Entered Sticker" + col.collider.tag);
 
-        string spriteApply = col.gameObject.name;
+        
 
-        if (col.collider.tag == Tags.STICKER)
+    }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+            Debug.Log("EnteredChute");
+            string spriteApply = col.gameObject.name;
+        if (col.tag == Tags.WRAPPING)
+        {
+            
+
+            attributes["wrapping"] = true;
+            Update_Attributes(spriteApply);
+            Change_Pattern(2, false, spriteApply);
+
+        }
+
+        if (col.tag == Tags.STICKER)
         {
 
             attributes["sticker"] = true;
@@ -47,32 +63,30 @@ public class BoxController : PhysicsObject, IPooledObject
             Change_Pattern(1, true, spriteApply);
 
         }
-        if (col.collider.tag == Tags.WRAPPING)
+
+
+        if (col.tag == Tags.CHUTE)
         {
-
-            attributes["wrapping"] = true;
-            Update_Attributes(spriteApply);
-            Change_Pattern(2, false, spriteApply);
-
-        }
-        
-
-    }
-
-    protected virtual void OnTriggerStay2D(Collider2D collision)
-    {
             Debug.Log("EnteredChute");
-        if (collision.tag == Tags.CHUTE)
-        {
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
         }
     }
 
+    // public void OnTriggerStay2D(Collider2D collision)
+    // {
+    //         Debug.Log("EnteredChute");
+    //     if (collision.tag == Tags.CHUTE)
+    //     {
+    //         GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
+
+    //     }
+    // }
+
     protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
     {
         
-        Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
+        // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
         pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
         pattern[index].enabled = true;
 
@@ -81,8 +95,8 @@ public class BoxController : PhysicsObject, IPooledObject
     void Update_Attributes(string spriteApply)
     {
 
-        Debug.Log("###Updating Attribute###");
-        Debug.Log(spriteApply);
+        // Debug.Log("###Updating Attribute###");
+        // Debug.Log(spriteApply);
 
         List<string> keys = new List<string>(attributes.Keys);
 
