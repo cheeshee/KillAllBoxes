@@ -29,7 +29,6 @@ public class OrderUI : MonoBehaviour
         {
             if (i < boxorders.orders.Count)
             {
-                Debug.Log("adding " + boxorders.orders[i].attributes["fragile"]);
                 orderSlots[i].AddOrder(boxorders.orders[i]);
             }
         }

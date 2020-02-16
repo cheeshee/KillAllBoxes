@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : PhysicsObject
+public class BoxController : PhysicsObject, IPooledObject
 {
 
     [Header("Box Attributes")]
@@ -10,6 +10,8 @@ public class BoxController : PhysicsObject
     public string[] fields = {"blueSticker", "redSticker", "whiteSticker", 
                               "bubbleWrap"}; //test for push
     // Start is called before the first frame update
+    public bool isHeavy = false;
+    public bool isFragile = false;
     [SerializeField] private SpriteRenderer[] pattern;
 
 
@@ -18,8 +20,9 @@ public class BoxController : PhysicsObject
         attributes = new Dictionary<string, bool>();
         foreach (string attribute in fields)
         {
+            Debug.Log("Here 2");
             attributes.Add(attribute, false);
-            Debug.Log(attribute);
+            Debug.Log("Here 3");
         }
     }
     
@@ -35,46 +38,52 @@ public class BoxController : PhysicsObject
 
         Debug.Log("Box Entered Collision");
 
-        string apply = col.gameObject.GetComponent<FloorController>().apply;
+        string spriteApply = col.gameObject.name;
 
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(1, true, apply);
+            Update_Attributes(spriteApply);
+            Change_Pattern(1, true, spriteApply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(2, false, apply);
+            Update_Attributes(spriteApply);
+            Change_Pattern(2, false, spriteApply);
+
+        }
+        if(col.collider.tag == Tags.CHUTE){
+
+            GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
         }
 
     }
 
-    protected virtual void Change_Pattern(int index, bool sticker, string apply){
+    protected virtual void Change_Pattern(int index, bool sticker, string spriteApply){
 
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
+        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
         pattern[index].enabled = true;
 
     } 
 
-    void Update_Attributes(string apply){
+    void Update_Attributes(string spriteApply){
 
         Debug.Log("###Updating Attribute###");
-        Debug.Log(apply);
+        Debug.Log(spriteApply);
 
-        foreach(KeyValuePair<string, bool> attrib in attributes){
+        List<string> keys = new List<string>(attributes.Keys);
 
-            attributes[attrib.Key] = false;
+        foreach(string key in keys){
 
-            if(attrib.Key == apply){
+            attributes[key] = false;
 
-                attributes[attrib.Key] = true;
-                Debug.Log(attrib.Key + ": " + attrib.Value);
-            
+            if(key == spriteApply){
+
+                attributes[key] = true;
+
             }
 
         }

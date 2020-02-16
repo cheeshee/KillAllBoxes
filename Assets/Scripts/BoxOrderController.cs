@@ -28,9 +28,10 @@ public class BoxOrderController : MonoBehaviour
     public void CheckBox(BoxController currentBox)
     {
         bool completed = true;
-        BoxController checkedOrder = null;
         foreach (BoxController order in orders)
         {
+            completed = true;
+
             foreach (string key in order.fields)
             {
                 if (order.attributes[key] != currentBox.attributes[key]) 
@@ -41,19 +42,16 @@ public class BoxOrderController : MonoBehaviour
             }
             if (completed)
             {
-                checkedOrder = order;
+                Debug.Log("Correct!");
                 break;
             }
         }
 
-        if (checkedOrder != null)
-        {
-            Remove(checkedOrder);
-            // play sound
-        } else
+        if (!completed)
         {
             // Penalty for incorrect box
-        }
+            Debug.Log("Incorrect!");
+        } 
     }
 
     private void Remove (BoxController box )
@@ -86,6 +84,7 @@ public class BoxOrderController : MonoBehaviour
         BoxController order = new BoxController();
 
         int status = Random.Range(0, 4);
+        int type = Random.Range(0, 3);
         int bubbleRNG = Random.Range(0, 2);
         if (status != 3)
         {
@@ -95,6 +94,17 @@ public class BoxOrderController : MonoBehaviour
         {
             order.attributes[order.fields[3]] = true;
         }
-        orders.Add(order);
+        switch (type)
+        {
+            case 1:
+                order.isHeavy = true;
+                break;
+            case 2:
+                order.isFragile = true;
+                break;
+            default:
+                break;
+        }
+        Add(order);
     }
 }
