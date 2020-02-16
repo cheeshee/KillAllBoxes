@@ -73,18 +73,12 @@ public class SpawnController : MonoBehaviour
                 boxSpawnNumber = 0;
             }
 
-            boxCount++;
+            boxCount++;    
 
             lastSpawnedBoxTime = Time.time;
         }
 
-        /* Restart Code
-        using UnityEngine.SceneManagement;
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        */
+
     }
 
     void BoxOnDeath()
