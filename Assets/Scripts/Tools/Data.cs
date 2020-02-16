@@ -15,6 +15,7 @@ public struct Tags  {
 public struct Pool
 {
     public static readonly string NORMAL_BOX = "Normal_Box";
-    public static readonly string HEAVY_BOX = "heavy_box";
-    public static readonly string FRAGILE_BOX = "fragile_box";
+    public static readonly string HEAVY_BOX = "Heavy_Box";
+    public static readonly string FRAGILE_BOX = "Fragile_Box";
+
 } 

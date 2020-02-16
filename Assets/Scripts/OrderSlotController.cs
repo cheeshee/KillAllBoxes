@@ -38,7 +38,7 @@ public class OrderSlotController : MonoBehaviour
 
         if (box.attributes["blueSticker"] == true)
         {
-            Debug.Log("wrap");
+            // Debug.Log("wrap");
             blue.gameObject.SetActive(true);
         }
         if (box.attributes["redSticker"] == true)

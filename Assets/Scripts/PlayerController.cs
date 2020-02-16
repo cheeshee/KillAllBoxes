@@ -74,8 +74,6 @@ public class PlayerController : PhysicsObject
 
         if (grabLadder)
         {
-
-            Debug.Log(velocity.y);
             velocity.y = InputManager.GetVertical(playerNumber) * ladderSpeed;
             //isGrounded = true;
             gravityModifier = 0;
@@ -186,7 +184,6 @@ public class PlayerController : PhysicsObject
         {
             
                 if (boxInst.transform.parent != null) {
-                Debug.Log("Not Null");
                     boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
                     boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
                 }
