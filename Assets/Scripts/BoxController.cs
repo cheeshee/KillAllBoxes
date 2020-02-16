@@ -7,9 +7,11 @@ public class BoxController : MonoBehaviour
 
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = {"fragile", "heavy", "sticker", "wrapping"};
-    [SerializeField] private SpriteRenderer[] pattern;
+    public string[] fields = {"blueSticker", "redSticker", "whiteSticker", 
+                              "bubbleWrap"};
     // Start is called before the first frame update
+    [SerializeField] private SpriteRenderer[] pattern;
+
 
     public virtual void OnObjectSpawn()
     {
@@ -22,23 +24,14 @@ public class BoxController : MonoBehaviour
     
     void Start(){
 
+        //For Testing
         attributes = new Dictionary<string, bool>();
         foreach (string attribute in fields)
         {
             attributes.Add(attribute, false);
         }
 
-         pattern = GetComponentsInChildren<SpriteRenderer>();
-
-         foreach(SpriteRenderer pat in pattern){
-
-             if(pat.name != "PlaceHolder_Box"){
-
-                 pat.enabled = false;
-
-             }
-
-         }
+        pattern = GetComponentsInChildren<SpriteRenderer>();
 
     }
 
@@ -49,12 +42,14 @@ public class BoxController : MonoBehaviour
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
+            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
             Change_Pattern(1, true, col.gameObject.GetComponent<FloorController>().apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
+            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
             Change_Pattern(2, false, col.gameObject.GetComponent<FloorController>().apply);
 
         }
@@ -67,5 +62,21 @@ public class BoxController : MonoBehaviour
         pattern[index].enabled = true;
 
     } 
+
+    void Update_Attributes(string apply){
+
+        Debug.Log("###Updating Attribute###");
+
+        foreach(KeyValuePair<string, bool> attrib in attributes){
+
+            if(attrib.Key == apply){
+
+                attributes[attrib.Key] = true;
+            
+            }
+
+        }
+
+    }
 
 }
