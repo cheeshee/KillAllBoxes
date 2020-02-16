@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-    private GameObject boxInst;
+    private BoxController boxInst;
     public bool inGrabRange;
     public bool holding;
 
     private bool onLadder;
     private bool grabLadder;
+
+    private float range = 2.0f;
+
+    private float seconds = 0.5f;
+    private float alarm = 50.0f;
+    private float timer = 0.0f;
 
     protected Vector2 move;
 
@@ -28,8 +34,6 @@ public class PlayerController : PhysicsObject
         grabLadder = false;
     }
 
-
-
     protected override void FixedUpdate(){
 
         base.FixedUpdate();
@@ -42,11 +46,13 @@ public class PlayerController : PhysicsObject
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        
-        if (InputManager.IsShipping(playerNumber)) {
+        checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
+        if (InputManager.IsShipping(playerNumber) && timer >= alarm) //if player presses button
+        {
             pickUpBox();
+            timer = 0.0f; //reset delay, else bug occurs where players mass drop and pick up boxes
         }
-
+        timer += seconds;
     }
 
     protected override void ComputeVelocity()
@@ -84,6 +90,7 @@ public class PlayerController : PhysicsObject
         {
             onLadder = true;
         } 
+        /*
         else if (collision.tag == Tags.BOX)
         {
             Debug.Log("colliding trigger");
@@ -91,14 +98,41 @@ public class PlayerController : PhysicsObject
             Debug.Log(boxInst);
             // grabBox = true;
         }
+        */
     }
-
+    /*
     protected private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.collider.tag == Tags.BOX)
         {
             Debug.Log("colliding");
             boxInst = collision.collider.gameObject;
             Debug.Log(boxInst);
+            inGrabRange = true;
+        }
+    }
+    */
+
+    private void checkBoxInRange() {
+        BoxController[] boxes = FindObjectsOfType<BoxController>();
+        if (boxes.Length > 0) {
+            boxInst = boxes[0];
+        }
+        for (int i = 1; i < boxes.Length; i++) {
+            //pythagorean to check which boxes are closest
+            float x1 = Mathf.Pow(boxes[i].transform.position.x - gameObject.transform.position.x, 2);
+            float y1 = Mathf.Pow(boxes[i].transform.position.y - gameObject.transform.position.y, 2);
+            float x2 = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
+            float y2 = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
+
+            if (x1 + y1 < x2 + y2) {
+                boxInst = boxes[i];
+            }
+        }
+        float x = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
+        float y = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
+
+        if (Mathf.Sqrt(x + y) <= range) {
+            //Debug.Log("In Range");
             inGrabRange = true;
         }
     }
@@ -129,17 +163,19 @@ public class PlayerController : PhysicsObject
     private void pickUpBox() {
             if (holding)
             {
-                holding = false;
-                inGrabRange = false;
                 boxInst.transform.parent = null;
-                boxInst.GetComponent<Rigidbody2D>().simulated = true;
+                holding = false;
+                boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
+                //boxInst.GetComponent<Rigidbody2D>().simulated = true;
             }
-            else if(inGrabRange)
+            else if(inGrabRange && !holding)
             {
                 holding = true;
+                boxInst.transform.position = gameObject.transform.position;
                 boxInst.transform.parent = gameObject.transform;
-                boxInst.GetComponent<Rigidbody2D>().simulated = false;
-            }
+                boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
+            //boxInst.GetComponent<Rigidbody2D>().simulated = false;
+        }
         
     }
     
