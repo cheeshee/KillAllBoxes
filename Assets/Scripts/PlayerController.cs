@@ -13,11 +13,11 @@ public class PlayerController : PhysicsObject
     public bool holding;
 
     private float range = 0.5f;
-
+    /*
     [SerializeField] private float seconds = 0.5f;
     [SerializeField] private float alarm = 2.5f;
     [SerializeField] private float timer = 0.0f;
-
+    */
     [Header("2DVec")]
     protected Vector2 move;
 
@@ -58,12 +58,12 @@ public class PlayerController : PhysicsObject
         }
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
-        if (InputManager.IsShipping(playerNumber) && timer >= alarm) //if player presses button
+        if (InputManager.IsShipping(playerNumber)) //if player presses button && timer >= alarm
         {
             pickUpBox();
-            timer = 0.0f; //reset delay, else bug occurs where players mass drop and pick up boxes
+            //timer = 0.0f; //reset delay, else bug occurs where players mass drop and pick up boxes
         }
-        timer += seconds;
+        //timer += seconds;
     }
 
     protected override void ComputeVelocity()
