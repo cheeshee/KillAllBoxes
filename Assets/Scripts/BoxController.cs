@@ -8,10 +8,11 @@ public class BoxController : PhysicsObject, IPooledObject
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
     public string[] fields = {"blueSticker", "redSticker", "whiteSticker",
-                              "bubbleWrap"}; //test for push
+                              "bubbleWrap", "xRay"}; //test for push
     // Start is called before the first frame update
     public bool isHeavy = false;
     public bool isFragile = false;
+    public bool isSafe = true;
     [SerializeField] private SpriteRenderer[] pattern;
 
 
@@ -70,6 +71,29 @@ public class BoxController : PhysicsObject, IPooledObject
             Debug.Log("EnteredChute");
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
+        }
+
+        if (col.tag == Tags.XRAY)
+        {
+            if(isSafe)
+            {
+                
+                col.transform.GetChild(0).gameObject.SetActive(true);
+            } 
+            else
+            {
+                col.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == Tags.XRAY)
+        {
+            
+            col.transform.GetChild(0).gameObject.SetActive(false);
+            col.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
