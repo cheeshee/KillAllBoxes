@@ -116,9 +116,9 @@ TextureImporter:
       name: BoxSpawner_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 128
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -127,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1850414af32a39f4293940de4a0343e6
+      spriteID: e0652113408296a40907cacf54636392
       internalID: 3291379622810273203
       vertices: []
       indices: 
@@ -137,9 +137,9 @@ TextureImporter:
       name: BoxSpawner_1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 112
         y: 128
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -148,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6b81497e6ad0df4891cdd9fc403eba6
+      spriteID: a053e6a6410b11a408087b43c68d8d3a
       internalID: -8753897383150777796
       vertices: []
       indices: 
@@ -158,9 +158,9 @@ TextureImporter:
       name: BoxSpawner_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 64
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -169,7 +169,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3e8d0bb255270f4c99b41e607b9b937
+      spriteID: ed455dfbafa96a24ab58c0c0da24ffb8
       internalID: 7018619161990139838
       vertices: []
       indices: 
@@ -179,9 +179,9 @@ TextureImporter:
       name: BoxSpawner_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 112
         y: 64
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -190,7 +190,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7aa1e4dd218bde1418ef64f33107772e
+      spriteID: f3e537ee2c67a4047a76ba96bc0c4c1b
       internalID: 6231933468743842657
       vertices: []
       indices: 
@@ -200,9 +200,9 @@ TextureImporter:
       name: BoxSpawner_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 0
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -211,7 +211,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c7a37137db880d498371a8266bc5ae7
+      spriteID: 233c31b227168d743bf895c986d9287b
       internalID: 838279752682842294
       vertices: []
       indices: 
@@ -221,9 +221,9 @@ TextureImporter:
       name: BoxSpawner_5
       rect:
         serializedVersion: 2
-        x: 96
+        x: 112
         y: 0
-        width: 96
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -232,7 +232,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6544639fbb571a4685078eaa59e5f66
+      spriteID: 178a797f4959ba14cb73474c185f3e92
       internalID: 4228855464014869669
       vertices: []
       indices: 
