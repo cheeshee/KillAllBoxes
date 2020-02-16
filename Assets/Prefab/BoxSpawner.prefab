@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8725993245698087968}
   - component: {fileID: 9177775048060371665}
   - component: {fileID: 3638653185042442391}
+  - component: {fileID: 6196382297098218826}
   m_Layer: 0
   m_Name: BoxSpawner
   m_TagString: Untagged
@@ -201,3 +202,16 @@ MonoBehaviour:
   spawner: {fileID: 6994959977673626436}
   endpoint: {fileID: 2448965532020715155}
   speed: 2
+--- !u!114 &6196382297098218826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994959977673626436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8e1e7b4a51cc441bef9ddab9245b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialSpawnRate: 10

@@ -97,10 +97,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
   initialGravityModifier: 1
+  boxInst: {fileID: 0}
+  onLadder: 0
+  grabLadder: 0
+  inGrabRange: 0
+  holding: 0
+  seconds: 0.5
+  alarm: 50
+  timer: 0
   jumpTakeOffSpeed: 0
   playerNumber: 1
-  maxSpeed: 1
-  ladderSpeed: 3
+  maxSpeed: 2
+  ladderSpeed: 2
 --- !u!50 &1291408253310708081
 Rigidbody2D:
   serializedVersion: 4
