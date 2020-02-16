@@ -59,6 +59,7 @@ public class BoxOrderController : MonoBehaviour
 
     public void Add (BoxController box)
     {
+
         orders.Add(box);
     }
 

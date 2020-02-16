@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
 
     void FixedUpdate(){
 
-        InputManager.MainInput();
+        InputManager.MainInput(1);
 
     }
 

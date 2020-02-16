@@ -45,5 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - tag: Normal_Box
-    prefab: {fileID: 0}
+    prefab: {fileID: 3991539164642455653, guid: bc5989c22ab898b4ba3e25b1565530d3,
+      type: 3}
     size: 5

@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : MonoBehaviour
+public class BoxController :  MonoBehaviour, IPooledObject
 {
-
-    [Header("Box Attributes")]
-    [SerializeField] private Dictionary<string, bool> attributes;
-    [SerializeField] private string[] fields = {"fragile", "heavy", "bubble", "wrapping"};
-    [SerializeField] public transform[] pattern;
+    public Dictionary<string, bool> attributes;
+    public string[] fields = { "fragile", "heavy", "bubble", "wrapping" };
+   
     // Start is called before the first frame update
-    void Awake()
+
+    // Update is called once per frame
+    
+    protected virtual void Update()
     {
+
+    }
+
+    public virtual void OnObjectSpawn()
+    {
+        attributes = new Dictionary<string, bool>();
         foreach (string attribute in fields)
         {
             attributes.Add(attribute, false);
         }
-
-        pattern = gameObject.GetComponentsInChildren<transform>();
-        
     }
-
+    /*
     void FixedUpdate(){
 
         Change_Active();
@@ -29,7 +33,21 @@ public class BoxController : MonoBehaviour
 
     void Change_Active(){
 
-    
+        foreach(SpriteRenderer in pattern){
+
+            if(attribute(pattern.gameObject.name) == false){
+
+                pattern.enabled(false);
+
+            }
+            else if{
+
+                pattern.enabled(true);
+
+            }
+
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D col){
@@ -62,6 +80,6 @@ public class BoxController : MonoBehaviour
 
 
     }
-
+    */
 
 }
