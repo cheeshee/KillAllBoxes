@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController :  MonoBehaviour, IPooledObject
+public class BoxController : MonoBehaviour
 {
+
+    [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = { "fragile", "heavy", "bubble", "wrapping" };
-   
+    public string[] fields = {"fragile", "heavy", "sticker", "wrapping"};
+    [SerializeField] private SpriteRenderer[] pattern;
     // Start is called before the first frame update
-
-    // Update is called once per frame
-    
-    protected virtual void Update()
-    {
-
-    }
 
     public virtual void OnObjectSpawn()
     {
@@ -24,7 +19,19 @@ public class BoxController :  MonoBehaviour, IPooledObject
             attributes.Add(attribute, false);
         }
     }
-    /*
+
+    void Start(){
+
+        attributes = new Dictionary<string, bool>();
+        foreach (string attribute in fields)
+        {
+            attributes.Add(attribute, false);
+        }
+
+         pattern = GetComponentsInChildren<SpriteRenderer>();
+
+    }
+
     void FixedUpdate(){
 
         Change_Active();
@@ -33,16 +40,16 @@ public class BoxController :  MonoBehaviour, IPooledObject
 
     void Change_Active(){
 
-        foreach(SpriteRenderer in pattern){
+        foreach(KeyValuePair<string, bool> pair in attributes){
 
-            if(attribute(pattern.gameObject.name) == false){
+            if(pair.Key == "bubble"){
 
-                pattern.enabled(false);
+                pattern[1].enabled = pair.Value;
 
             }
-            else if{
+            else if(pair.Key == "wrapping"){
 
-                pattern.enabled(true);
+                pattern[2].enabled = pair.Value;
 
             }
 
@@ -52,14 +59,14 @@ public class BoxController :  MonoBehaviour, IPooledObject
 
     void OnCollisionEnter2D(Collision2D col){
 
-        if(col.tag == Tag.BUBBLE){
+        if(col.collider.tag == Tags.STICKER){
 
-            attribute("bubble", true);
+            attributes["sticker"] = true;
 
         }
-        if(col.tag == Tag.WRAPPING){
+        if(col.collider.tag == Tags.WRAPPING){
 
-            attribute("wrapping", true);
+            attributes["wrapping"] = true;
 
         }
 
@@ -67,19 +74,19 @@ public class BoxController :  MonoBehaviour, IPooledObject
 
     void OnCOllisionExit2D(Collision2D col){
         
-        if(col.tag == Tag.BUBBLE){
+        if(col.collider.tag == Tags.STICKER){
 
-            attribute("bubble", false);
+            attributes["sticker"] = false;
 
         }
-        if(col.tag == Tag.WRAPPING){
+        if(col.collider.tag == Tags.WRAPPING){
 
-            attribute("wrapping", false);
-
+            attributes["wrapping"] = false;
+ 
         }
 
 
     }
-    */
+
 
 }
