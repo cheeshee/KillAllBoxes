@@ -84,17 +84,16 @@ public class BoxOrderController : MonoBehaviour
     void GenerateOrder()
     {
         BoxController order = new BoxController();
-        foreach (string key in order.fields)
+
+        int status = Random.Range(0, 4);
+        int bubbleRNG = Random.Range(0, 2);
+        if (status != 3)
         {
-            int status = Random.Range(0, 2);
-            if (status == 0)
-            {
-                order.attributes[key] = false;
-            }
-            else
-            {
-                order.attributes[key] = true;
-            }
+            order.attributes[order.fields[status]] = true;
+        }
+        if (bubbleRNG == 0)
+        {
+            order.attributes[order.fields[3]] = true;
         }
         orders.Add(order);
     }

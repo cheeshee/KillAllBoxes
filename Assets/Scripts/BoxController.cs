@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : MonoBehaviour
+public class BoxController : PhysicsObject
 {
 
     [Header("Box Attributes")]
@@ -23,7 +23,7 @@ public class BoxController : MonoBehaviour
         }
     }
     
-    void Start(){
+    protected override void Start(){
 
         OnObjectSpawn();
 
@@ -31,28 +31,30 @@ public class BoxController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D col){
+    protected virtual void OnCollisionEnter2D(Collision2D col){
 
         Debug.Log("Box Entered Collision");
+
+        string apply = col.gameObject.GetComponent<FloorController>().apply;
 
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
-            Change_Pattern(1, true, col.gameObject.GetComponent<FloorController>().apply);
+            Update_Attributes(apply);
+            Change_Pattern(1, true, apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
-            Change_Pattern(2, false, col.gameObject.GetComponent<FloorController>().apply);
+            Update_Attributes(apply);
+            Change_Pattern(2, false, apply);
 
         }
 
     }
 
-    void Change_Pattern(int index, bool sticker, string apply){
+    protected virtual void Change_Pattern(int index, bool sticker, string apply){
 
         pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
         pattern[index].enabled = true;
@@ -65,6 +67,8 @@ public class BoxController : MonoBehaviour
         Debug.Log(apply);
 
         foreach(KeyValuePair<string, bool> attrib in attributes){
+
+            attributes[attrib.Key] = false;
 
             if(attrib.Key == apply){
 
