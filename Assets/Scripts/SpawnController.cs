@@ -14,13 +14,15 @@ public class SpawnController : MonoBehaviour
     private List<int> boxList;
     private int bombBox;
     private BoxController boxComponent;
+    private int boxCount;
 
 // Start is called before the first frame update
-protected void Start()
+    protected void Start()
     {
         spawnRate = initialSpawnRate;
         lastSpawnedBoxTime = Time.time;
         boxSpawnNumber = 0;
+        boxCount = 0;
         generateNewList();
     }
 
@@ -64,13 +66,18 @@ protected void Start()
                 boxSpawnNumber = 0;
             }
 
+            boxCount++;
+
             lastSpawnedBoxTime = Time.time;
         }
     }
 
 
 
-
+    public void decrementBoxes()
+    {
+        boxCount--;
+    }
 
 
     private void generateNewList()
