@@ -11,6 +11,7 @@ public class PlayerController : PhysicsObject
     [SerializeField] private bool onLadder;
     [SerializeField] private bool grabLadder;
     [SerializeField] private bool idleboolean;
+    [SerializeField] private bool checkrange; 
     public bool inGrabRange;
     public bool holding;
     [SerializeField] private float range = 0.5f;
@@ -50,7 +51,9 @@ public class PlayerController : PhysicsObject
             facingRight = true;
         }
 
-        checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
+        if(checkrange){
+            checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
+        }
         if (InputManager.IsShipping(playerNumber)) //if player presses button
         {
             pickUpBox();
@@ -77,6 +80,10 @@ public class PlayerController : PhysicsObject
             gravityModifier = 0;
         }
 
+        idleboolean = Mathf.Abs(velocity.x) > 0;
+        gameObject.GetComponent<Animator>().SetBool("moving", idleboolean);
+
+        /*
         if (Mathf.Abs(velocity.x) > 0)
         {
             gameObject.GetComponent<Animator>().SetBool("moving", true);
@@ -85,6 +92,7 @@ public class PlayerController : PhysicsObject
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
         }
+        */
 
         targetVelocity = move * maxSpeed * speedModifier;
     }
@@ -118,8 +126,6 @@ public class PlayerController : PhysicsObject
     */
 
     private void checkBoxInRange() {
-
-        Debug.Log("Running Pytha Check");
 
         BoxController[] boxes = FindObjectsOfType<BoxController>();
 
@@ -171,13 +177,15 @@ public class PlayerController : PhysicsObject
 
     private void pickUpBox() {
 
+        checkrange = true;
 
 		if (holding)
 		{
 			boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
             boxInst.GetComponent<Rigidbody2D>().simulated = true;
 			gameObject.GetComponent<Animator>().SetBool("holding", false);
-			
+
+            checkrange = false;
             boxInst.transform.parent = null;
 			holding = false;
 			speedModifier = 1f;
