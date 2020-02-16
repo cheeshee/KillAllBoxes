@@ -30,11 +30,17 @@ public class PlayerController : PhysicsObject
     protected float maxSpeed = 1.6f;
     [SerializeField]
     private float ladderSpeed = 3;
+
+
+    public bool facingRight = true;
+
+
     protected override void Start()
     {
         base.Start();
         onLadder = false;
         grabLadder = false;
+        facingRight = true;
     }
 
     protected override void FixedUpdate(){
@@ -43,10 +49,12 @@ public class PlayerController : PhysicsObject
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            facingRight = false;
         }
         else if (InputManager.GetHorizontal(playerNumber) > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            facingRight = true;
         }
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
