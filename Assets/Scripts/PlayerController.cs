@@ -51,15 +51,15 @@ public class PlayerController : PhysicsObject
 
         base.FixedUpdate();
 
-        facingRight = InputManager.GetHorizontal(playerNumber) > 0;
-
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            facingRight = false;
         }
         else if (InputManager.GetHorizontal(playerNumber) > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            facingRight = true;
         }
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
