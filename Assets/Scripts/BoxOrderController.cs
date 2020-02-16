@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BoxOrderController : MonoBehaviour
 {
+    private float timer = 0.0f;
+    private float alarm = 1000.0f;
+    private float seconds = 0.5f;
+
+
     public List<BoxController> orders = new List<BoxController>();
     // Start is called before the first frame update
 
@@ -104,4 +109,17 @@ public class BoxOrderController : MonoBehaviour
         }
         Add(order);
     }
+
+    private void Update()
+    {
+        if (timer >= alarm)
+        {
+            timer = 0.0f;
+            GenerateOrder();
+        }
+        else {
+            timer += seconds;
+        }
+    }
+
 }
