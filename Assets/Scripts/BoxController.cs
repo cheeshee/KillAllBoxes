@@ -35,18 +35,20 @@ public class BoxController : MonoBehaviour
 
         Debug.Log("Box Entered Collision");
 
+        string apply = col.gameObject.GetComponent<FloorController>().apply;
+
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
-            Change_Pattern(1, true, col.gameObject.GetComponent<FloorController>().apply);
+            Update_Attributes(apply);
+            Change_Pattern(1, true, apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            Update_Attributes(col.gameObject.GetComponent<FloorController>().apply);
-            Change_Pattern(2, false, col.gameObject.GetComponent<FloorController>().apply);
+            Update_Attributes(apply);
+            Change_Pattern(2, false, apply);
 
         }
 
