@@ -21,6 +21,10 @@ public class BoxOrderController : MonoBehaviour
     }
     #endregion
 
+    public delegate void OnItemChanged();
+
+    public OnItemChanged onItemChangedCallback;
+
     void CheckBox(BoxController currentBox)
     {
         bool completed = true;
@@ -59,8 +63,18 @@ public class BoxOrderController : MonoBehaviour
 
     public void Add (BoxController box)
     {
-
-        orders.Add(box);
+        if (orders.Count < 8)
+        {
+            orders.Add(box);
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
+        } else
+        {
+            Debug.Log("Too many objects");
+        }
+        
     }
 
     void GenerateOrder()
