@@ -43,8 +43,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerStay2D(Collider2D col)
     {
-            Debug.Log("EnteredChute");
-            string spriteApply = col.gameObject.name;
+        string spriteApply = col.gameObject.name;
         if (col.tag == Tags.WRAPPING)
         {
             
@@ -67,7 +66,6 @@ public class BoxController : PhysicsObject, IPooledObject
 
         if (col.tag == Tags.CHUTE)
         {
-            Debug.Log("EnteredChute");
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
         }
@@ -102,13 +100,12 @@ public class BoxController : PhysicsObject, IPooledObject
 
         foreach (string key in keys)
         {
-
-            attributes[key] = false;
-
+            
             if (key == spriteApply)
             {
 
                 attributes[key] = true;
+                break;
 
             }
 

@@ -32,7 +32,7 @@ public class BoxOrderController : MonoBehaviour
 
     public void CheckBox(BoxController currentBox)
     {
-
+        Debug.Log(currentBox.attributes);
         BoxController correctOrder = null;
         bool completed = true;
         foreach (BoxController order in orders)
