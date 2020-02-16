@@ -32,33 +32,51 @@ public class BoxOrderController : MonoBehaviour
 
     public void CheckBox(BoxController currentBox)
     {
-
+        Debug.Log(currentBox.attributes);
+        BoxController correctOrder = null;
+        bool completed = true;
         foreach (BoxController order in orders)
         {
+            completed = true;
             foreach (string key in order.fields)
             {
+                Debug.Log("Current box field " + key + " is: " + currentBox.attributes[key]);
+                Debug.Log("Order box field " + key + " is: " + order.attributes[key]);
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
-
-                    Debug.Log("Incorrect!");
-                    //Lose the game
+                    completed = false;
+                    Debug.Log("Failed this order");
                     break;
-                
                 }
-                else if(order.attributes[key] == currentBox.attributes[key]){
                 
-                    Debug.Log("Correct!");
-                    //Play a sound
-                    break;
-                
-                }
             }
+            Debug.Log("Fragile: " + currentBox.isFragile);
+            Debug.Log("Heavy: " + currentBox.isHeavy); 
+
+            if (completed && (order.isFragile == currentBox.isFragile) && (order.isHeavy == currentBox.isHeavy))
+            {
+                correctOrder = order;
+                break;
+            }
+        }
+
+        currentBox.gameObject.SetActive(false);
+
+        if (correctOrder != null)
+        {
+            Remove(correctOrder);
+            Debug.Log("Correct");
+        } else
+        {
+            Debug.Log("failed");
         }
     }
 
     private void Remove (BoxController box )
     {
+        Debug.Log(orders.Count);
         orders.Remove(box);
+        Debug.Log(orders.Count);
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();

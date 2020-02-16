@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 6387973394379303491}
   - component: {fileID: 3445588571191715342}
   - component: {fileID: -6894305832311253654}
-  - component: {fileID: 8846408211377247671}
+  - component: {fileID: 2690962261506915375}
   m_Layer: 11
   m_Name: HeavyBox
   m_TagString: Box
@@ -210,7 +210,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8846408211377247671
+--- !u!114 &2690962261506915375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,15 +219,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3690350601797322015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5f1079902a1ce4581322635151160f, type: 3}
+  m_Script: {fileID: 11500000, guid: ae22e0d19a6ff3346ac87353ea59cc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
   initialGravityModifier: 1
   fields:
-  - blueSticker
-  - redSticker
-  - whiteSticker
+  - stickerBlue
+  - stickerRed
+  - stickerWhite
   - bubbleWrap
   isHeavy: 0
   isFragile: 0

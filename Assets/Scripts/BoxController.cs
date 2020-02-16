@@ -7,12 +7,13 @@ public class BoxController : PhysicsObject, IPooledObject
 
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = {"blueSticker", "redSticker", "whiteSticker",
+    public string[] fields = {"stickerBlue", "stickerRed", "stickerWhite",
                               "bubbleWrap"}; //test for push
     // Start is called before the first frame update
     public bool isHeavy = false;
     public bool isFragile = false;
-    [SerializeField] private SpriteRenderer[] pattern;
+    public bool isSafe = true;
+    [SerializeField] private List<SpriteRenderer> pattern; 
 
 
     public virtual void OnObjectSpawn()
@@ -31,13 +32,28 @@ public class BoxController : PhysicsObject, IPooledObject
 
         pattern = GetComponentsInChildren<SpriteRenderer>();
 
-    }
+        //foreach(Transform child in transform){
 
-    protected virtual void OnCollisionEnter2D(Collision2D col)
-    {
-        // Debug.Log("Entered Sticker" + col.collider.tag);
+        //    if(child.gameObject.name == "Wrapper"){
 
-        
+        //        pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
+        //        continue;
+
+        //    }
+        //    for(int i = 0; i < 3; i++){
+
+        //        pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
+
+        //    }
+
+        //}
+
+        foreach(SpriteRenderer sprite in pattern){
+
+            sprite.enabled = false;
+            sprite.sortingOrder = 1;
+            
+        }
 
     }
 
@@ -53,33 +69,50 @@ public class BoxController : PhysicsObject, IPooledObject
 
     void OnTriggerStay2D(Collider2D col)
     {
-            Debug.Log("EnteredChute");
-            string spriteApply = col.gameObject.name;
+        string spriteApply = col.gameObject.name;
         if (col.tag == Tags.WRAPPING)
         {
             
-
-            attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
-            Change_Pattern(2, false, spriteApply);
+            Change_Pattern(false, spriteApply);
 
         }
 
         if (col.tag == Tags.STICKER)
         {
 
-            attributes["sticker"] = true;
             Update_Attributes(spriteApply);
-            Change_Pattern(1, true, spriteApply);
+            Change_Pattern(true, spriteApply);
 
         }
 
 
         if (col.tag == Tags.CHUTE)
         {
-            Debug.Log("EnteredChute");
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
+        }
+
+        if (col.tag == Tags.XRAY)
+        {
+            if(isSafe)
+            {
+                
+                col.transform.GetChild(0).gameObject.SetActive(true);
+            } 
+            else
+            {
+                col.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == Tags.XRAY)
+        {
+            col.transform.GetChild(0).gameObject.SetActive(false);
+            col.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -93,12 +126,23 @@ public class BoxController : PhysicsObject, IPooledObject
     //     }
     // }
 
-    protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
+    protected virtual void Change_Pattern(bool sticker, string spriteApply)
     {
         
         // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
-        pattern[index].enabled = true;
+        
+        foreach(SpriteRenderer sprite in pattern){
+
+            Debug.Log("Sprite Name: " + sprite.name);
+            sprite.enabled = false;
+
+            if(sprite.name == spriteApply){
+
+                sprite.enabled = true;
+
+            }
+            
+        }
 
     }
 
@@ -110,19 +154,31 @@ public class BoxController : PhysicsObject, IPooledObject
 
         List<string> keys = new List<string>(attributes.Keys);
 
-        foreach (string key in keys)
+
+        Debug.Log("Currently updating " + spriteApply);
+
+        switch (spriteApply)
         {
-
-            attributes[key] = false;
-
-            if (key == spriteApply)
-            {
-
-                attributes[key] = true;
-
-            }
+            case "stickerBlue":
+                attributes["stickerRed"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerRed":
+                attributes["stickerBlue"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerWhite":
+                attributes["stickerRed"] = false;
+                attributes["stickerBlue"] = false;
+                break;
+            case "bubbleWrap":
+                break;
+            default:
+                break;
 
         }
+        attributes[spriteApply] = true;
+        Debug.Log(spriteApply + " is " + attributes[spriteApply]);
 
     }
 }
