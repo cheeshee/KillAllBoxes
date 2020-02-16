@@ -42,6 +42,16 @@ public class BoxController : PhysicsObject, IPooledObject
 
     }
 
+    public virtual bool isBoxHeavy()
+    {
+        return false;
+    }
+
+    public virtual bool isBoxFragile()
+    {
+        return false;
+    }
+
     void OnTriggerStay2D(Collider2D col)
     {
             Debug.Log("EnteredChute");
