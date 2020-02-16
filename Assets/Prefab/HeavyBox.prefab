@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8559923047879399006}
   - component: {fileID: 6387973394379303491}
   - component: {fileID: 3445588571191715342}
+  - component: {fileID: -6894305832311253654}
+  - component: {fileID: 8846408211377247671}
   m_Layer: 11
   m_Name: HeavyBox
   m_TagString: Untagged
@@ -106,3 +108,42 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!50 &-6894305832311253654
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3690350601797322015}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8846408211377247671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3690350601797322015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1079902a1ce4581322635151160f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields:
+  - blueSticker
+  - redSticker
+  - whiteSticker
+  - bubbleWrap
+  pattern: []
