@@ -107,7 +107,7 @@ MonoBehaviour:
   timer: 0
   jumpTakeOffSpeed: 0
   playerNumber: 1
-  maxSpeed: 2
+  maxSpeed: 3
   ladderSpeed: 2
 --- !u!50 &1291408253310708081
 Rigidbody2D:
