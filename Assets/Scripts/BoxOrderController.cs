@@ -110,6 +110,7 @@ public class BoxOrderController : MonoBehaviour
                 break;
         }
         Add(order);
+        Debug.Log("Order Created: " + order);
     }
 
     private void Update()
