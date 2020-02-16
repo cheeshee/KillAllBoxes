@@ -780,9 +780,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1937806075}
   - component: {fileID: 1937806074}
-  - component: {fileID: 1937806076}
   - component: {fileID: 1937806077}
   - component: {fileID: 1937806078}
+  - component: {fileID: 1937806076}
   m_Layer: 0
   m_Name: PlaceHolder_Box
   m_TagString: Untagged
@@ -867,10 +867,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fields:
-  - fragile
-  - heavy
-  - bubble
-  - wrapping
+  - blueSticker
+  - redSticker
+  - whiteSticker
+  - bubbleWrap
   pattern: []
 --- !u!61 &1937806077
 BoxCollider2D:
