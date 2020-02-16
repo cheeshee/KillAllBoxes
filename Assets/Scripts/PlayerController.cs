@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : PhysicsObject
 {
     private GameObject boxInst;
-    private bool grabBox;
+    public bool inGrabRange;
+    public bool holding;
 
     private bool onLadder;
     private bool grabLadder;
@@ -39,6 +40,11 @@ public class PlayerController : PhysicsObject
         else if (InputManager.GetHorizontal(playerNumber) > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        
+        if (InputManager.IsShipping(playerNumber)) {
+            pickUpBox();
         }
 
     }
@@ -77,15 +83,34 @@ public class PlayerController : PhysicsObject
         if (collision.tag == Tags.LADDER)
         {
             onLadder = true;
+        } 
+        else if (collision.tag == Tags.BOX)
+        {
+            Debug.Log("colliding trigger");
+            boxInst = collision.gameObject;
+            Debug.Log(boxInst);
+            // grabBox = true;
         }
     }
 
-    protected private void OnTriggerEnter2d(Collider2D collision) {
-        if (collision.tag == Tags.BOX)
+    protected private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.tag == Tags.BOX)
         {
-            boxInst = collision.gameObject;
+            Debug.Log("colliding");
+            boxInst = collision.collider.gameObject;
+            Debug.Log(boxInst);
+            inGrabRange = true;
         }
     }
+
+    // protected private void OnCollisionExit2D(Collision2D collision) {
+    //     if(collision.collider.tag == Tags.BOX && inGrabRange)
+    //     {
+    //         Debug.Log("Leaving collision");
+    //         inGrabRange = false;
+    //         boxInst = null;
+    //     }
+    // }
 
     protected private void OnTriggerExit2D(Collider2D collision)
     {
@@ -93,26 +118,29 @@ public class PlayerController : PhysicsObject
         {
             onLadder = false;
         }
-        if (collision.tag == Tags.BOX)
-        {
-            boxInst = null;
-        }
+        // else if(collision.tag == Tags.BOX)
+        // {
+            
+        //     grabBox = false;
+        // }
 
     }
 
     private void pickUpBox() {
-        if (InputManager.IsShipping(playerNumber)) {
-            if (grabBox)
+            if (holding)
             {
-                grabBox = true;
+                holding = false;
+                inGrabRange = false;
                 boxInst.transform.parent = null;
+                boxInst.GetComponent<Rigidbody2D>().simulated = true;
             }
-            else
+            else if(inGrabRange)
             {
-                grabBox = false;
+                holding = true;
                 boxInst.transform.parent = gameObject.transform;
+                boxInst.GetComponent<Rigidbody2D>().simulated = false;
             }
-        }
+        
     }
     
 }
