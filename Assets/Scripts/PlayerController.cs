@@ -36,9 +36,13 @@ public class PlayerController : PhysicsObject
         facingRight = true;
     }
 
-    protected override void FixedUpdate(){
-
-        base.FixedUpdate();
+    protected override void Update()
+    {
+        base.Update();
+        if (InputManager.IsShipping(playerNumber)) //if player presses button
+        {
+            pickUpBox();
+        }
 
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
@@ -51,16 +55,14 @@ public class PlayerController : PhysicsObject
             facingRight = true;
         }
 
-        if(checkrange){
-            checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
-        }
-        else{
-            inGrabRange = false;
-        }
-        if (InputManager.IsShipping(playerNumber)) //if player presses button
-        {
-            pickUpBox();
-        }
+    }
+
+    protected override void FixedUpdate(){
+
+        base.FixedUpdate();
+
+        checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
+
     }
 
     protected override void ComputeVelocity()
@@ -180,7 +182,6 @@ public class PlayerController : PhysicsObject
 
     private void pickUpBox() {
 
-        checkrange = true;
 
 		if (holding)
 		{
@@ -188,7 +189,6 @@ public class PlayerController : PhysicsObject
             boxInst.GetComponent<Rigidbody2D>().simulated = true;
 			gameObject.GetComponent<Animator>().SetBool("holding", false);
 
-            checkrange = false;
             boxInst.transform.parent = null;
 			holding = false;
 			speedModifier = 1f;
