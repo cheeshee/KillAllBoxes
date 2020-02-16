@@ -13,8 +13,6 @@ public class PlayerController : PhysicsObject
     [SerializeField] private bool idleboolean;
     public bool inGrabRange;
     public bool holding;
-
-
     [SerializeField] private float range = 0.5f;
 
     [Header("2DVec")]
@@ -180,10 +178,11 @@ public class PlayerController : PhysicsObject
 		if (holding)
 		{
 			boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
-			boxInst.transform.parent = null;
-			holding = false;
-			boxInst.GetComponent<Rigidbody2D>().simulated = true;
+            boxInst.GetComponent<Rigidbody2D>().simulated = true;
 			gameObject.GetComponent<Animator>().SetBool("holding", false);
+			
+            boxInst.transform.parent = null;
+			holding = false;
 			speedModifier = 1f;
         }
         else if(inGrabRange && !holding)
