@@ -15,7 +15,7 @@ public class PlayerController : PhysicsObject
     private float range = 0.5f;
 
     [SerializeField] private float seconds = 0.5f;
-    [SerializeField] private float alarm = 15.0f;
+    [SerializeField] private float alarm = 2.5f;
     [SerializeField] private float timer = 0.0f;
 
     [Header("2DVec")]
@@ -205,14 +205,10 @@ public class PlayerController : PhysicsObject
 
             //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
             //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
-                if (gameObject.transform.position.x - boxInst.transform.position.x > 0 & move.x > 0)
-                    boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f , -1.0f);
-                else if (gameObject.transform.position.x - boxInst.transform.position.x > 0 & move.x < 0)
-                    boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
-                else if (gameObject.transform.position.x - boxInst.transform.position.x < 0 & move.x > 0)
-                    boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f, -1.0f);
+                if (facingRight)
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f , -1.0f);
                 else
-                    boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f, -1.0f);
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
             boxInst.transform.parent = gameObject.transform;
                 boxInst.GetComponent<Rigidbody2D>().simulated = false;
         }
