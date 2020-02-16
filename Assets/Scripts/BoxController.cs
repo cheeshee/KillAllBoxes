@@ -30,63 +30,46 @@ public class BoxController : MonoBehaviour
 
          pattern = GetComponentsInChildren<SpriteRenderer>();
 
-    }
+         foreach(SpriteRenderer pat in pattern){
 
-    void FixedUpdate(){
+             if(pat.name != "PlaceHolder_Box"){
 
-        Change_Active();
+                 pat.enabled = false;
 
-    }
+             }
 
-    void Change_Active(){
-
-        foreach(KeyValuePair<string, bool> pair in attributes){
-
-            if(pair.Key == "bubble"){
-
-                pattern[1].enabled = pair.Value;
-
-            }
-            else if(pair.Key == "wrapping"){
-
-                pattern[2].enabled = pair.Value;
-
-            }
-
-        }
+         }
 
     }
 
     void OnCollisionEnter2D(Collision2D col){
 
+        Debug.Log("Box Entered Collision");
+
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
+            Change_Pattern(1, Resources.Load<Sprite>("./Sprites/" + col.gameObject.GetComponent<FloorController>().apply), Texture2D);
+            Debug.Log("Changing Sticker to: " + "Sprites/" + col.gameObject.GetComponent<FloorController>().apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
+            Change_Pattern(2, Resources.Load<Sprite>("Sprites/" + col.gameObject.GetComponent<FloorController>().apply), Sprite);
+            Debug.Log("Changing Wrapper");
 
         }
 
     }
 
-    void OnCOllisionExit2D(Collision2D col){
-        
-        if(col.collider.tag == Tags.STICKER){
+    void Change_Pattern(int index, Sprite apply){
 
-            attributes["sticker"] = false;
-
-        }
-        if(col.collider.tag == Tags.WRAPPING){
-
-            attributes["wrapping"] = false;
- 
-        }
-
+        Debug.Log("Changing Sprite To: " + apply);
+        pattern[index].sprite = apply;
+        pattern[index].gameObject.transform.position.z.Equals(-1);
+        pattern[index].enabled = true;
 
     } */
-
 
 }
