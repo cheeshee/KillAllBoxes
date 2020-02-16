@@ -131,9 +131,13 @@ public class PlayerController : PhysicsObject
         float x = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
         float y = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
 
-        if (Mathf.Sqrt(x + y) <= range) {
+        if (x + y <= Mathf.Pow(range, 2))
+        {
             //Debug.Log("In Range");
             inGrabRange = true;
+        }
+        else {
+            inGrabRange = false;
         }
     }
 
