@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : PhysicsObject
 {
     public BoxController boxInst;
+    private BoxController currentlyHeldBox;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
@@ -30,6 +31,11 @@ public class PlayerController : PhysicsObject
     protected float maxSpeed = 1.6f;
     [SerializeField]
     private float ladderSpeed = 3;
+    [SerializeField]
+    private float heavyBoxModifier = 0.5f;
+
+    private float speedModifier = 1f;
+
 
 
     public bool facingRight = true;
@@ -82,7 +88,7 @@ public class PlayerController : PhysicsObject
 
         if (grabLadder)
         {
-            velocity.y = InputManager.GetVertical(playerNumber) * ladderSpeed;
+            velocity.y = InputManager.GetVertical(playerNumber) * ladderSpeed * speedModifier;
             //isGrounded = true;
             gravityModifier = 0;
         }
@@ -96,7 +102,7 @@ public class PlayerController : PhysicsObject
             gameObject.GetComponent<Animator>().SetBool("moving", false);
         }
 
-        targetVelocity = move * maxSpeed;
+        targetVelocity = move * maxSpeed * speedModifier;
     }
 
     protected private void OnTriggerStay2D(Collider2D collision)
@@ -181,27 +187,32 @@ public class PlayerController : PhysicsObject
 
     private void pickUpBox() {
 
-            if (holding)
-            {
-                boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
-                boxInst.transform.parent = null;
-                holding = false;
-                boxInst.GetComponent<Rigidbody2D>().simulated = true;
-            }
-            else if(inGrabRange && !holding)
+        if (holding)
+        {
+            boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
+            boxInst.transform.parent = null;
+            holding = false;
+            boxInst.GetComponent<Rigidbody2D>().simulated = true;
+            speedModifier = 1f;
+        }
+        else if(inGrabRange && !holding)
         {
             
-                if (boxInst.transform.parent != null) {
-                    boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
-                    boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
-                }
+            if (boxInst.transform.parent != null) {
+                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
+                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
+            }
                
                 
-                boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
-                holding = true;
-                boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
-                boxInst.transform.parent = gameObject.transform;
-                boxInst.GetComponent<Rigidbody2D>().simulated = false;
+            boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
+            holding = true;
+            boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
+            boxInst.transform.parent = gameObject.transform;
+            boxInst.GetComponent<Rigidbody2D>().simulated = false;
+            if (boxInst.isBoxHeavy())
+            {
+                speedModifier = heavyBoxModifier;
+            }
         }
         
     }
