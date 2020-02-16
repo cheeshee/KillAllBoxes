@@ -7,6 +7,8 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField]
     protected float minGroundNormalY = .65f;
     [SerializeField]
+    protected float initialGravityModifier = 1f;
+
     protected float gravityModifier = 1f;
 
     protected bool isGrounded;
@@ -38,6 +40,7 @@ public class PhysicsObject : MonoBehaviour
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer)); 
         //use physics2D settings to determine what layers we're going to check collisions against
         contactFilter.useLayerMask = true;
+        gravityModifier = initialGravityModifier;
     }
 
     protected virtual void Awake()
@@ -49,18 +52,21 @@ public class PhysicsObject : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        targetVelocity = Vector2.zero; // zeros out velocity so we don't use velocity from previous frame
-        ComputeVelocity ();
+
     }
 
 
     protected virtual void FixedUpdate()
     {
+        isGrounded = false; //switches to true when collision is found
+        targetVelocity = Vector2.zero; // zeros out velocity so we don't use velocity from previous frame
+        ComputeVelocity();
+
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime; //gravity
         
         velocity.x = targetVelocity.x;
 
-        isGrounded = false; //switches to true when collision is found
+
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
