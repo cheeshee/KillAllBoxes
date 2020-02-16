@@ -137,7 +137,10 @@ public class BoxController : PhysicsObject, IPooledObject
         foreach(SpriteRenderer sprite in pattern){
 
             Debug.Log("Sprite Name: " + sprite.name);
-            sprite.enabled = false;
+            
+            if(attributes[sprite.name] == false){
+                sprite.enabled = false;
+            }
 
             if(sprite.name == spriteApply){
 
