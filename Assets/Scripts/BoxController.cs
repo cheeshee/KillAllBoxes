@@ -35,8 +35,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
-
-        Debug.Log(col.collider.tag);
+        Debug.Log("Entered Sticker" + col.collider.tag);
 
         string spriteApply = col.gameObject.name;
 
@@ -72,7 +71,8 @@ public class BoxController : PhysicsObject, IPooledObject
 
     protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
     {
-
+        
+        Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
         pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
         pattern[index].enabled = true;
 
