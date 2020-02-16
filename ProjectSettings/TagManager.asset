@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sticker
+  - Ladder
   layers:
   - Default
   - TransparentFX

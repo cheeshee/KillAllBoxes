@@ -19,7 +19,7 @@ public class BoxController : MonoBehaviour
             attributes.Add(attribute, false);
         }
     }
-
+    /*
     void Start(){
 
         attributes = new Dictionary<string, bool>();
@@ -66,6 +66,6 @@ public class BoxController : MonoBehaviour
         pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
         pattern[index].enabled = true;
 
-    }
+    } */
 
 }

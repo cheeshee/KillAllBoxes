@@ -25,7 +25,7 @@ public class BoxOrderController : MonoBehaviour
 
     public OnItemChanged onItemChangedCallback;
 
-    void CheckBox(BoxController currentBox)
+    public void CheckBox(BoxController currentBox)
     {
         bool completed = true;
         BoxController checkedOrder = null;
@@ -48,7 +48,7 @@ public class BoxOrderController : MonoBehaviour
 
         if (checkedOrder != null)
         {
-            orders.Remove(checkedOrder);
+            Remove(checkedOrder);
             // play sound
         } else
         {
@@ -56,9 +56,13 @@ public class BoxOrderController : MonoBehaviour
         }
     }
 
-    public void Remove (BoxController box )
+    private void Remove (BoxController box )
     {
         orders.Remove(box);
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
     }
 
     public void Add (BoxController box)
