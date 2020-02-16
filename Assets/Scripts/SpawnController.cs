@@ -7,6 +7,8 @@ public class SpawnController : MonoBehaviour
 
     [SerializeField]
     protected float initialSpawnRate = 10;
+    [SerializeField]
+    private int randomPacketSize = 6;
     protected float spawnRate;
     protected float lastSpawnedBoxTime;
     protected int boxSpawnNumber = 0;
@@ -15,11 +17,13 @@ public class SpawnController : MonoBehaviour
     private int bombBox;
     private BoxController boxComponent;
 
+
+
 // Start is called before the first frame update
 protected void Start()
     {
         spawnRate = initialSpawnRate;
-        lastSpawnedBoxTime = Time.time;
+        lastSpawnedBoxTime = -spawnRate;
         boxSpawnNumber = 0;
         generateNewList();
     }
@@ -58,7 +62,7 @@ protected void Start()
             }
 
             boxSpawnNumber++;
-            if (boxSpawnNumber >= 9)
+            if (boxSpawnNumber >= randomPacketSize)
             {
                 generateNewList();
                 boxSpawnNumber = 0;
@@ -76,16 +80,20 @@ protected void Start()
     private void generateNewList()
     {
         boxList = Fisher_Yates_CardDeck_Shuffle();
-        bombBox = Random.Range(0, 9);
+        bombBox = Random.Range(0, randomPacketSize);
     }
 
 
 
 
-    public static List<int> Fisher_Yates_CardDeck_Shuffle()
+    public List<int> Fisher_Yates_CardDeck_Shuffle()
     {
 
-        List<int> aList = new List<int> { 0,1,2,3,4,5,6,7,8 };
+        List<int> aList = new List<int>();
+        for (int i = 0; i < randomPacketSize; i++)
+        {
+            aList.Add(i);
+        }
 
         System.Random _random = new System.Random();
 
