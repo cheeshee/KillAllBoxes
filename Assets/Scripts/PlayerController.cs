@@ -91,6 +91,10 @@ public class PlayerController : PhysicsObject
             gravityModifier = 0;
         }
 
+        bool result = Mathf.Abs(velocity.x) > 0;
+        gameObject.GetComponent<Animator>().SetBool("moving", result);
+
+        /*
         if (Mathf.Abs(velocity.x) > 0)
         {
             gameObject.GetComponent<Animator>().SetBool("moving", true);
@@ -99,7 +103,8 @@ public class PlayerController : PhysicsObject
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
         }
-
+        */
+        
         targetVelocity = move * maxSpeed * speedModifier;
     }
 
