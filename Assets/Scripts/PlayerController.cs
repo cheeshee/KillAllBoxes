@@ -6,13 +6,14 @@ public class PlayerController : PhysicsObject
 {
     [Header("BoxController")]
     public BoxController boxInst;
-    [SerializeField] private BoxController currentlyHeldBox;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
     [SerializeField] private bool grabLadder;
+    [SerializeField] private bool idleboolean;
     public bool inGrabRange;
     public bool holding;
+
 
     [SerializeField] private float range = 0.5f;
 
@@ -20,20 +21,13 @@ public class PlayerController : PhysicsObject
     protected Vector2 move;
 
     [Header("Values")]
-    [SerializeField]
-    protected float jumpTakeOffSpeed;
-    [SerializeField]
-    protected int playerNumber = 1;
-    [SerializeField]
-    protected float maxSpeed = 1.6f;
-    [SerializeField]
-    private float ladderSpeed = 3;
-    [SerializeField]
-    private float heavyBoxModifier = 0.5f;
-
+    [SerializeField] protected int playerNumber = 1;
+    [SerializeField] protected float maxSpeed = 1.6f;
+    [SerializeField] private float ladderSpeed = 3;
+    [SerializeField] private float heavyBoxModifier = 0.5f;
     private float speedModifier = 1f;
-
     public bool facingRight = true;
+
 
     protected override void Start()
     {
@@ -46,12 +40,7 @@ public class PlayerController : PhysicsObject
     protected override void FixedUpdate(){
 
         base.FixedUpdate();
-        
-        int result = InputManager.GetHorizontal(playerNumber) > 0 ? 2 : 0;
-        transform.localScale = new Vector3(result-1, 1f, 1f);
-        facingRight = result-1 > 0;
 
-        /*
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -62,7 +51,6 @@ public class PlayerController : PhysicsObject
             transform.localScale = new Vector3(1f, 1f, 1f);
             facingRight = true;
         }
-        */
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
         if (InputManager.IsShipping(playerNumber)) //if player presses button
@@ -91,8 +79,8 @@ public class PlayerController : PhysicsObject
             gravityModifier = 0;
         }
 
-        bool result = Mathf.Abs(velocity.x) > 0;
-        gameObject.GetComponent<Animator>().SetBool("moving", result);
+        idleboolean = Mathf.Abs(velocity.x) > 0;
+        gameObject.GetComponent<Animator>().SetBool("moving", idleboolean);
 
         /*
         if (Mathf.Abs(velocity.x) > 0)
@@ -104,7 +92,7 @@ public class PlayerController : PhysicsObject
             gameObject.GetComponent<Animator>().SetBool("moving", false);
         }
         */
-        
+
         targetVelocity = move * maxSpeed * speedModifier;
     }
 
@@ -202,6 +190,7 @@ public class PlayerController : PhysicsObject
         {
             
 			if (boxInst.transform.parent != null) {
+
 				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
 				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
 				boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
@@ -210,8 +199,10 @@ public class PlayerController : PhysicsObject
 
 
 			gameObject.GetComponent<Animator>().SetBool("holding", true);
+
 			boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
-			holding = true;
+			
+            holding = true;
 
             //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
             //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
