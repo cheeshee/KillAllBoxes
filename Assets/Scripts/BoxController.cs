@@ -113,8 +113,9 @@ public class BoxController : PhysicsObject, IPooledObject
 
         if (col.tag == Tags.INCINERATOR)
         {
-            Debug.Log("BURN");
-            Object.Destroy(gameObject);
+            //Debug.Log("BURN");
+            //Object.Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }
