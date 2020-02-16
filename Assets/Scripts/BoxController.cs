@@ -19,7 +19,7 @@ public class BoxController : MonoBehaviour
             attributes.Add(attribute, false);
         }
     }
-
+    /*
     void Start(){
 
         attributes = new Dictionary<string, bool>();
@@ -86,7 +86,7 @@ public class BoxController : MonoBehaviour
         }
 
 
-    }
+    } */
 
 
 }
