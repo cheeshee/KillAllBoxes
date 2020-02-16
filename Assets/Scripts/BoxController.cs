@@ -23,24 +23,23 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             attributes.Add(attribute, false);
         }
-    }
 
-    protected override void Start()
-    {
 
-        OnObjectSpawn();
+        foreach (Transform child in transform)
+        {
 
-        foreach(Transform child in transform){
-
-            if(child.gameObject.name == "bubbleWrap"){
+            if (child.gameObject.name == "bubbleWrap")
+            {
 
                 pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
                 continue;
 
             }
-            else{
+            else
+            {
 
-                for(int i = 0; i < 3; i++){
+                for (int i = 0; i < 3; i++)
+                {
 
                     pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
 
@@ -50,6 +49,25 @@ public class BoxController : PhysicsObject, IPooledObject
             }
 
         }
+
+        foreach (SpriteRenderer sprite in pattern)
+        {
+
+
+             sprite.enabled = false;
+            
+
+ 
+
+        }
+
+    }
+
+    protected override void Start()
+    {
+
+        //OnObjectSpawn();
+
 
         //foreach(SpriteRenderer sprite in pattern){
 
@@ -175,17 +193,6 @@ public class BoxController : PhysicsObject, IPooledObject
 
 
         Debug.Log("Currently updating " + spriteApply);
-
-        foreach(string key in keys){
-
-            if(key == spriteApply){
-
-                attributes[key] = true;
-
-            }
-
-        }
-
 
         attributes[spriteApply] = true;
         Debug.Log(spriteApply + " is " + attributes[spriteApply]);

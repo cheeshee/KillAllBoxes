@@ -120,11 +120,21 @@ public class BoxOrderController : MonoBehaviour
         BoxController order = currentBox.GetComponent<BoxController>();
         currentBox.SetActive(false);
         order.OnObjectSpawn();
-        int status = Random.Range(0, 4);
+        int redRNG = Random.Range(0, 2);
+        int blueRNG = Random.Range(0, 2);
+        int whiteRNG = Random.Range(0, 2);
         int bubbleRNG = Random.Range(0, 2);
-        if (status != 3)
+        if (blueRNG == 0)
         {
-            order.attributes[order.fields[status]] = true;
+            order.attributes[order.fields[0]] = true;
+        }
+        if (redRNG == 0)
+        {
+            order.attributes[order.fields[1]] = true;
+        }
+        if (whiteRNG == 0)
+        {
+            order.attributes[order.fields[2]] = true;
         }
         if (bubbleRNG == 0)
         {
