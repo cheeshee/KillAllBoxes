@@ -19,6 +19,12 @@ public class PlayerController : PhysicsObject
     [SerializeField]
     protected float maxSpeed = 1;
 
+    protected override void Start()
+    {
+        base.Start();
+        onLadder = false;
+        grabLadder = false;
+    }
 
 
 
@@ -33,17 +39,25 @@ public class PlayerController : PhysicsObject
         move = Vector2.zero;
         move.x = InputManager.GetHorizontal(playerNumber);
 
+
+
+
         if (onLadder && InputManager.GetButtonUp(playerNumber))
         {
             grabLadder = true;
         }
         else if (!onLadder){
             grabLadder = false;
+            gravityModifier = initialGravityModifier;
         }
 
         if (grabLadder)
         {
-            move.y = InputManager.GetVertical(playerNumber);
+
+            Debug.Log(velocity.y);
+            velocity.y = InputManager.GetVertical(playerNumber) *5;
+            //isGrounded = true;
+            gravityModifier = 0;
         }
 
         targetVelocity = move * maxSpeed;
