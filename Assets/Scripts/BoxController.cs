@@ -36,7 +36,7 @@ public class BoxController : PhysicsObject, IPooledObject
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
 
-        Debug.Log("Box Entered Collision");
+        Debug.Log(col.collider.tag);
 
         string spriteApply = col.gameObject.name;
 
@@ -56,13 +56,18 @@ public class BoxController : PhysicsObject, IPooledObject
             Change_Pattern(2, false, spriteApply);
 
         }
-        if (col.collider.tag == Tags.CHUTE)
-        {
+        
 
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+            Debug.Log("EnteredChute");
+        if (collision.tag == Tags.CHUTE)
+        {
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
         }
-
     }
 
     protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
