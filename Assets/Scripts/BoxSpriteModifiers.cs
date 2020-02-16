@@ -13,7 +13,7 @@ public class BoxSpriteModifiers : MonoBehaviour
 
     public Sprite Apply_Sprite(bool sticker, string apply){
 
-        Debug.Log("Changing Sprite, is it a sticker? " + sticker.ToString());
+        //Debug.Log("Changing Sprite, is it a sticker? " + sticker.ToString());
 
         if(sticker){
 
