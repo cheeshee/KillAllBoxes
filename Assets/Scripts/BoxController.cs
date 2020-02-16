@@ -12,6 +12,7 @@ public class BoxController : PhysicsObject, IPooledObject
     // Start is called before the first frame update
     public bool isHeavy = false;
     public bool isFragile = false;
+    public bool isSafe = true;
     [SerializeField] private SpriteRenderer[] pattern;
 
 
@@ -31,6 +32,22 @@ public class BoxController : PhysicsObject, IPooledObject
 
         pattern = GetComponentsInChildren<SpriteRenderer>();
 
+        //foreach(Transform child in transform){
+
+        //    if(child.gameObject.name == "Wrapper"){
+
+        //        pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
+        //        continue;
+
+        //    }
+        //    for(int i = 0; i < 3; i++){
+
+        //        pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
+
+        //    }
+
+        //}
+
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
@@ -41,14 +58,22 @@ public class BoxController : PhysicsObject, IPooledObject
 
     }
 
+    public virtual bool isBoxHeavy()
+    {
+        return false;
+    }
+
+    public virtual bool isBoxFragile()
+    {
+        return false;
+    }
+
     void OnTriggerStay2D(Collider2D col)
     {
         string spriteApply = col.gameObject.name;
         if (col.tag == Tags.WRAPPING)
         {
             
-
-            //attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(2, false, spriteApply);
 
@@ -57,7 +82,6 @@ public class BoxController : PhysicsObject, IPooledObject
         if (col.tag == Tags.STICKER)
         {
 
-            //attributes["sticker"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(1, true, spriteApply);
 
@@ -68,6 +92,29 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
+        }
+
+        if (col.tag == Tags.XRAY)
+        {
+            if(isSafe)
+            {
+                
+                col.transform.GetChild(0).gameObject.SetActive(true);
+            } 
+            else
+            {
+                col.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == Tags.XRAY)
+        {
+            
+            col.transform.GetChild(0).gameObject.SetActive(false);
+            col.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -85,8 +132,10 @@ public class BoxController : PhysicsObject, IPooledObject
     {
         
         // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
-        pattern[index].enabled = true;
+        //pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
+        //pattern[index].enabled = true;
+
+
 
     }
 
