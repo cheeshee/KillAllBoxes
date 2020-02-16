@@ -3,10 +3,15 @@ using UnityEngine.UI;
 
 public class ScoreUpdater : MonoBehaviour
 {
-    public GameObject boxOrdersForScore;
-
+    ScoreControllerScript scorer;
+    Text elementText;
+    private void Start()
+    {
+        scorer = ScoreControllerScript.instance;
+        elementText = GetComponent<Text>();
+    }
     private void Update()
     {
-        
+        elementText.text = (scorer.getScore().ToString());
     }
 }
