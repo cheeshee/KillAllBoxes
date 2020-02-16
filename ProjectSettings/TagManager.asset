@@ -10,6 +10,7 @@ TagManager:
   - Chute
   - Box
   - Xray
+  - Incinerator
   layers:
   - Default
   - TransparentFX

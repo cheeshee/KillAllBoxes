@@ -11,6 +11,7 @@ public struct Tags  {
     public static readonly string WRAPPING = "Wrapping";
     public static readonly string CHUTE = "Chute";
     public static readonly string XRAY = "Xray";
+    public static readonly string INCINERATOR = "Incinerator";
 }
 
 public struct Pool

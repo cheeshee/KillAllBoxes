@@ -30,7 +30,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
         OnObjectSpawn();
 
-        pattern = GetComponentsInChildren<SpriteRenderer>();
+        //pattern = GetComponentsInChildren<SpriteRenderer>();
 
         //foreach(Transform child in transform){
 
@@ -105,6 +105,18 @@ public class BoxController : PhysicsObject, IPooledObject
                 col.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
+
+
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+
+        if (col.tag == Tags.INCINERATOR)
+        {
+            Debug.Log("BURN");
+            Object.Destroy(gameObject);
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D col)
