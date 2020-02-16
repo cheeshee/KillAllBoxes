@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-    private BoxController boxInst;
+    [SerializeField] private GameObject boxInst;
+
+    [Header("Boolean")]
+    [SerializeField] private bool onLadder;
+    [SerializeField] private bool grabLadder;
     public bool inGrabRange;
     public bool holding;
-
-    private bool onLadder;
-    private bool grabLadder;
 
     private float range = 2.0f;
 
@@ -17,8 +18,10 @@ public class PlayerController : PhysicsObject
     private float alarm = 50.0f;
     private float timer = 0.0f;
 
+    [Header("2DVec")]
     protected Vector2 move;
 
+    [Header("Values")]
     [SerializeField]
     protected float jumpTakeOffSpeed;
     [SerializeField]
@@ -161,6 +164,7 @@ public class PlayerController : PhysicsObject
     }
 
     private void pickUpBox() {
+
             if (holding)
             {
                 boxInst.transform.parent = null;
