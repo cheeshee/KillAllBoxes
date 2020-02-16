@@ -15,9 +15,11 @@ public class OrderBehaviourTest : MonoBehaviour
     }
 
     void AddOrder()
+
     {
         GameObject order = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
         BoxController currentBox = order.GetComponent<BoxController>();
+        currentBox.OnObjectSpawn();
         foreach (string key in currentBox.fields)
         {
             int status = Random.Range(0, 2);
@@ -30,7 +32,15 @@ public class OrderBehaviourTest : MonoBehaviour
                 currentBox.attributes[key] = true;
             }
         }
-        Debug.Log("Made it here");
+        ShowDictionary(currentBox);
         BoxOrderController.instance.Add(currentBox);
+    }
+
+    void ShowDictionary(BoxController box)
+    {
+        foreach(string key in box.attributes.Keys)
+        {
+            Debug.Log(key + "is " + box.attributes[key]);
+        }
     }
 }
