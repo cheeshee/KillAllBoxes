@@ -10,6 +10,7 @@ public class BoxOrderController : MonoBehaviour
 
 
     public List<BoxController> orders = new List<BoxController>();
+    public GameObject scoreManager;
      
     // Start is called before the first frame update
 
@@ -29,8 +30,13 @@ public class BoxOrderController : MonoBehaviour
 
     public delegate void OnItemChanged();
 
-    public OnItemChanged onItemChangedCallback;
+    ScoreControllerScript scoring;
 
+    public OnItemChanged onItemChangedCallback;
+    private void Start()
+    {
+        scoring = ScoreControllerScript.instance;
+    }
     public void CheckBox(BoxController currentBox)
     {
         
@@ -61,6 +67,7 @@ public class BoxOrderController : MonoBehaviour
                 else
                 {
                     Debug.Log("You passed an unsafe box. Shame on you.");
+                    scoring.subtractScore(20);
                     break;
                 }
                 
@@ -78,12 +85,14 @@ public class BoxOrderController : MonoBehaviour
             Debug.Log("Correct");
         } else
         {
+            scoring.subtractScore(20);
             Debug.Log("Failed");
         }
     }
 
     private void Remove (BoxController box )
     {
+        scoring.addScore(40);
         orders.Remove(box);
         if (onItemChangedCallback != null)
         {

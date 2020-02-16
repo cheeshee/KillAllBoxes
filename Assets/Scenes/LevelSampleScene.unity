@@ -800,12 +800,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &109634233 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1528754225742696453, guid: 078574a42a65315419728391e2c5bd00,
-    type: 3}
-  m_PrefabInstance: {fileID: 920320215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &415089624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1078,6 +1072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 539928390}
+  - component: {fileID: 539928391}
   m_Layer: 5
   m_Name: ScoreController
   m_TagString: Untagged
@@ -1104,6 +1099,19 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 431.1529}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &539928391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539928389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65083330c66d3a4383827d1819c54ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
 --- !u!1001 &609598447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1357,12 +1365,12 @@ PrefabInstance:
     - target: {fileID: 5691538827854685968, guid: d283ab8b539bacc4bb56459ec8de9cdc,
         type: 3}
       propertyPath: pools.Array.data[1].size
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5691538827854685968, guid: d283ab8b539bacc4bb56459ec8de9cdc,
         type: 3}
       propertyPath: pools.Array.data[2].size
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d283ab8b539bacc4bb56459ec8de9cdc, type: 3}
@@ -2371,6 +2379,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 1528754225742696472, guid: 078574a42a65315419728391e2c5bd00,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 539928389}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 078574a42a65315419728391e2c5bd00, type: 3}
 --- !u!1001 &931542153
@@ -7966,7 +7979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a58eaee4a5e6546a897228b525fd2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxOrdersForScore: {fileID: 109634233}
 --- !u!1001 &1980124577
 PrefabInstance:
   m_ObjectHideFlags: 0
