@@ -32,6 +32,14 @@ public class PlayerController : PhysicsObject
     protected override void FixedUpdate(){
 
         base.FixedUpdate();
+        if (InputManager.GetHorizontal(playerNumber) < 0)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if (InputManager.GetHorizontal(playerNumber) > 0)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
 
     }
 
