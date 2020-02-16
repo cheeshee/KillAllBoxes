@@ -48,3 +48,11 @@ MonoBehaviour:
     prefab: {fileID: 3991539164642455653, guid: bc5989c22ab898b4ba3e25b1565530d3,
       type: 3}
     size: 5
+  - tag: Heavy_Box
+    prefab: {fileID: 3690350601797322015, guid: 445f72d095d6a4d48b19de32c8549af7,
+      type: 3}
+    size: 5
+  - tag: Fragile_Box
+    prefab: {fileID: 4530274671651468359, guid: 7ff07a730c7cfe34185a89ea680b9a6d,
+      type: 3}
+    size: 5

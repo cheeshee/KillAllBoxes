@@ -21,9 +21,12 @@ public class SpawnController : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+
         if (Time.time > lastSpawnedBoxTime + spawnRate)
         {
             StartCoroutine(SpawnBoxSet());
+            // Debug.Log("Spawn!");
+            lastSpawnedBoxTime = Time.time;
         }
     }
 
@@ -32,7 +35,6 @@ public class SpawnController : MonoBehaviour
         GameObject box = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
         box.GetComponent<BoxController>().OnObjectSpawn();
         yield return new WaitForSeconds(10 * (1f / 60f));
-
         box = ObjectPooler.Instance.SpawnFromPool(Pool.HEAVY_BOX, transform.position, Quaternion.identity);
         box.GetComponent<BoxController>().OnObjectSpawn();
         yield return new WaitForSeconds(10 * (1f / 60f));
