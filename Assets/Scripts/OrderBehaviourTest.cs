@@ -40,7 +40,7 @@ public class OrderBehaviourTest : MonoBehaviour
     {
         foreach(string key in box.attributes.Keys)
         {
-            Debug.Log(key + "is " + box.attributes[key]);
+            //Debug.Log(key + "is " + box.attributes[key]);
         }
     }
 }
