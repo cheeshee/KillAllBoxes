@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyBox : BoxController
+public class HeavyBoxController : BoxController
 {
 
     public override void OnObjectSpawn()
@@ -11,6 +11,9 @@ public class HeavyBox : BoxController
         isHeavy = true; 
     }
 
-
+    public override bool isBoxHeavy()
+    {
+        return true;
+    }
 
 }

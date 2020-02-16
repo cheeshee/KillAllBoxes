@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Chute
   - Box
+  - Xray
   layers:
   - Default
   - TransparentFX

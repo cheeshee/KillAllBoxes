@@ -10,6 +10,7 @@ public struct Tags  {
     public static readonly string STICKER = "Sticker";
     public static readonly string WRAPPING = "Wrapping";
     public static readonly string CHUTE = "Chute";
+    public static readonly string XRAY = "Xray";
 }
 
 public struct Pool
