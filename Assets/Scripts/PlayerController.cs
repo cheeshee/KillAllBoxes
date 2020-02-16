@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
+    [Header("BoxController")]
     public BoxController boxInst;
-    private BoxController currentlyHeldBox;
+    [SerializeField] private BoxController currentlyHeldBox;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
@@ -13,7 +14,7 @@ public class PlayerController : PhysicsObject
     public bool inGrabRange;
     public bool holding;
 
-    private float range = 0.5f;
+    [SerializeField] private float range = 0.5f;
 
     [Header("2DVec")]
     protected Vector2 move;
@@ -32,10 +33,7 @@ public class PlayerController : PhysicsObject
 
     private float speedModifier = 1f;
 
-
-
     public bool facingRight = true;
-
 
     protected override void Start()
     {
@@ -48,6 +46,12 @@ public class PlayerController : PhysicsObject
     protected override void FixedUpdate(){
 
         base.FixedUpdate();
+        
+        int result = InputManager.GetHorizontal(playerNumber) > 0 ? 2 : 0;
+        transform.localScale = new Vector3(result-1, 1f, 1f);
+        facingRight = result-1 > 0;
+
+        /*
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -58,12 +62,12 @@ public class PlayerController : PhysicsObject
             transform.localScale = new Vector3(1f, 1f, 1f);
             facingRight = true;
         }
+        */
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
         if (InputManager.IsShipping(playerNumber)) //if player presses button
         {
             pickUpBox();
-
         }
     }
 
@@ -128,11 +132,14 @@ public class PlayerController : PhysicsObject
     */
 
     private void checkBoxInRange() {
+
         BoxController[] boxes = FindObjectsOfType<BoxController>();
+
         if (boxes.Length > 0 && !holding) {
             boxInst = boxes[0];
         
             for (int i = 1; i < boxes.Length; i++) {
+
                 //pythagorean to check which boxes are closest
                 float x1 = Mathf.Pow(boxes[i].transform.position.x - gameObject.transform.position.x, 2);
                 float y1 = Mathf.Pow(boxes[i].transform.position.y - gameObject.transform.position.y, 2);
@@ -203,7 +210,8 @@ public class PlayerController : PhysicsObject
 
             //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
             //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
-			if (facingRight)
+		
+        	if (facingRight)
 			{
 				boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f , -1.0f);
 			}
@@ -211,12 +219,15 @@ public class PlayerController : PhysicsObject
 			{
 				boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
 			}
+        
             boxInst.transform.parent = gameObject.transform;
             boxInst.GetComponent<Rigidbody2D>().simulated = false;
-			if (boxInst.isBoxHeavy())
+		
+        	if (boxInst.isBoxHeavy())
             {
                 speedModifier = heavyBoxModifier;
             }
+        
         }
         
     }
