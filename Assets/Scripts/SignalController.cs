@@ -13,7 +13,7 @@ public class SignalController : MonoBehaviour
             if(GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
 
-                GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,0);
+                // GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,0);
             }
         }
     }
