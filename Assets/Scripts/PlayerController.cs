@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-    private GameObject boxInst;
+    [SerializeField] private GameObject boxInst;
+
+    [Header("Boolean")]
+    [SerializeField] private bool onLadder;
+    [SerializeField] private bool grabLadder;
     public bool inGrabRange;
     public bool holding;
 
-    private bool onLadder;
-    private bool grabLadder;
-
+    [Header("2DVec")]
     protected Vector2 move;
 
+    [Header("Values")]
     [SerializeField]
     protected float jumpTakeOffSpeed;
     [SerializeField]
@@ -127,6 +130,7 @@ public class PlayerController : PhysicsObject
     }
 
     private void pickUpBox() {
+
             if (holding)
             {
                 holding = false;
