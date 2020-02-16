@@ -51,12 +51,12 @@ public class BoxController : PhysicsObject, IPooledObject
 
         }
 
-        foreach(SpriteRenderer sprite in pattern){
+        //foreach(SpriteRenderer sprite in pattern){
 
-            sprite.enabled = false;
-            sprite.sortingOrder = 1;
-            
-        }
+        //    sprite.enabled = false;
+        //    sprite.sortingOrder = 1;
+
+        //}
 
     }
 
@@ -108,6 +108,19 @@ public class BoxController : PhysicsObject, IPooledObject
                 col.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
+
+
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+
+        if (col.tag == Tags.INCINERATOR)
+        {
+            //Debug.Log("BURN");
+            //Object.Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D col)
