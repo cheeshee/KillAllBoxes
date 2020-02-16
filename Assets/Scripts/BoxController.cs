@@ -13,7 +13,7 @@ public class BoxController : PhysicsObject, IPooledObject
     public bool isHeavy = false;
     public bool isFragile = false;
     public bool isSafe = true;
-    [SerializeField] private SpriteRenderer[] pattern;
+    [SerializeField] private List<SpriteRenderer> pattern; 
 
 
     public virtual void OnObjectSpawn()
@@ -48,13 +48,12 @@ public class BoxController : PhysicsObject, IPooledObject
 
         //}
 
-    }
+        foreach(SpriteRenderer sprite in pattern){
 
-    protected virtual void OnCollisionEnter2D(Collision2D col)
-    {
-        // Debug.Log("Entered Sticker" + col.collider.tag);
-
-        
+            sprite.enabled = false;
+            sprite.sortingOrder = 1;
+            
+        }
 
     }
 
@@ -75,7 +74,7 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             
             Update_Attributes(spriteApply);
-            Change_Pattern(2, false, spriteApply);
+            Change_Pattern(false, spriteApply);
 
         }
 
@@ -83,7 +82,7 @@ public class BoxController : PhysicsObject, IPooledObject
         {
 
             Update_Attributes(spriteApply);
-            Change_Pattern(1, true, spriteApply);
+            Change_Pattern(true, spriteApply);
 
         }
 
@@ -112,7 +111,6 @@ public class BoxController : PhysicsObject, IPooledObject
     {
         if (col.tag == Tags.XRAY)
         {
-            
             col.transform.GetChild(0).gameObject.SetActive(false);
             col.transform.GetChild(1).gameObject.SetActive(false);
         }
@@ -128,14 +126,23 @@ public class BoxController : PhysicsObject, IPooledObject
     //     }
     // }
 
-    protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
+    protected virtual void Change_Pattern(bool sticker, string spriteApply)
     {
         
         // Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
-        //pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
-        //pattern[index].enabled = true;
+        
+        foreach(SpriteRenderer sprite in pattern){
 
+            Debug.Log("Sprite Name: " + sprite.name);
+            sprite.enabled = false;
 
+            if(sprite.name == spriteApply){
+
+                sprite.enabled = true;
+
+            }
+            
+        }
 
     }
 
