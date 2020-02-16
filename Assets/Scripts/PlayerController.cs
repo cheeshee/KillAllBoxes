@@ -43,7 +43,7 @@ public class PlayerController : PhysicsObject
 
 
 
-        if (onLadder && InputManager.GetButtonUp(playerNumber))
+        if (onLadder && InputManager.GetVertical(playerNumber) != 0) 
         {
             grabLadder = true;
         }
