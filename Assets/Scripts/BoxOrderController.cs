@@ -33,9 +33,10 @@ public class BoxOrderController : MonoBehaviour
     public void CheckBox(BoxController currentBox)
     {
         bool completed = true;
-        BoxController checkedOrder = null;
         foreach (BoxController order in orders)
         {
+            completed = true;
+
             foreach (string key in order.fields)
             {
                 if (order.attributes[key] != currentBox.attributes[key]) 
@@ -46,19 +47,16 @@ public class BoxOrderController : MonoBehaviour
             }
             if (completed)
             {
-                checkedOrder = order;
+                Debug.Log("Correct!");
                 break;
             }
         }
 
-        if (checkedOrder != null)
-        {
-            Remove(checkedOrder);
-            // play sound
-        } else
+        if (!completed)
         {
             // Penalty for incorrect box
-        }
+            Debug.Log("Incorrect!");
+        } 
     }
 
     private void Remove (BoxController box )

@@ -54,6 +54,11 @@ public class BoxController : PhysicsObject, IPooledObject
             Change_Pattern(2, false, spriteApply);
 
         }
+        if(col.collider.tag == Tags.CHUTE){
+
+            GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
+
+        }
 
     }
 
