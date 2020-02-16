@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class OrderSlotController : MonoBehaviour
 {
-    public Image wrapping;
+    public Image red;
+    public Image white;
+    public Image blue;
     public Image bubble;
     public Image selfImage;
     public Sprite normal;
@@ -16,10 +18,10 @@ public class OrderSlotController : MonoBehaviour
         box = newOrder;
         //Debug.Log(box.attributes["fragile"]);
 
-        if (box.attributes["fragile"] == true)
+        if (box.isFragile == true)
         {
             selfImage.sprite = fragile;
-        } else if (box.attributes["heavy"] == true)
+        } else if (box.isHeavy == true)
         {
             selfImage.sprite = heavy;
         } else
@@ -29,17 +31,23 @@ public class OrderSlotController : MonoBehaviour
 
         selfImage.color = new Color(selfImage.color.r, selfImage.color.g, selfImage.color.b, 1f);
 
-        if (box.attributes["bubble"] == true)
+        if (box.attributes["bubbleWrap"] == true)
         {
-            Debug.Log("bubbe");
             bubble.gameObject.SetActive(true);
-            //GetComponentInParent<>("icon1")
         }
 
-        if (box.attributes["wrapping"] == true)
+        if (box.attributes["blueSticker"] == true)
         {
             Debug.Log("wrap");
-            wrapping.gameObject.SetActive(true);
+            blue.gameObject.SetActive(true);
+        }
+        if (box.attributes["redSticker"] == true)
+        {
+            red.gameObject.SetActive(true);
+        }
+        if (box.attributes["whiteSticker"] == true)
+        {
+            white.gameObject.SetActive(true);
         }
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : PhysicsObject
+public class BoxController : PhysicsObject, IPooledObject
 {
 
     [Header("Box Attributes")]
@@ -10,6 +10,8 @@ public class BoxController : PhysicsObject
     public string[] fields = {"blueSticker", "redSticker", "whiteSticker", 
                               "bubbleWrap"}; //test for push
     // Start is called before the first frame update
+    public bool isHeavy = false;
+    public bool isFragile = false;
     [SerializeField] private SpriteRenderer[] pattern;
 
 
@@ -18,8 +20,9 @@ public class BoxController : PhysicsObject
         attributes = new Dictionary<string, bool>();
         foreach (string attribute in fields)
         {
+            Debug.Log("Here 2");
             attributes.Add(attribute, false);
-            Debug.Log(attribute);
+            Debug.Log("Here 3");
         }
     }
     
