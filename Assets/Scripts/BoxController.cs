@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : MonoBehaviour
+public class BoxController : PhysicsObject
 {
 
     [Header("Box Attributes")]
@@ -23,7 +23,7 @@ public class BoxController : MonoBehaviour
         }
     }
     
-    void Start(){
+    protected override void Start(){
 
         OnObjectSpawn();
 
@@ -31,7 +31,7 @@ public class BoxController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D col){
+    protected virtual void OnCollisionEnter2D(Collision2D col){
 
         Debug.Log("Box Entered Collision");
 
@@ -54,7 +54,7 @@ public class BoxController : MonoBehaviour
 
     }
 
-    void Change_Pattern(int index, bool sticker, string apply){
+    protected virtual void Change_Pattern(int index, bool sticker, string apply){
 
         pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
         pattern[index].enabled = true;
