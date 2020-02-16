@@ -15,7 +15,7 @@ public class PlayerController : PhysicsObject
     private float range = 0.5f;
 
     [SerializeField] private float seconds = 0.5f;
-    [SerializeField] private float alarm = 50.0f;
+    [SerializeField] private float alarm = 2.5f;
     [SerializeField] private float timer = 0.0f;
 
     [Header("2DVec")]
@@ -187,20 +187,29 @@ public class PlayerController : PhysicsObject
                 boxInst.transform.parent = null;
                 holding = false;
                 boxInst.GetComponent<Rigidbody2D>().simulated = true;
-            }
+                gameObject.GetComponent<Animator>().SetBool("holding", false);
+        }
             else if(inGrabRange && !holding)
         {
             
                 if (boxInst.transform.parent != null) {
                     boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
                     boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
-                }
-               
-                
+                    boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
+            }
+
+
+                gameObject.GetComponent<Animator>().SetBool("holding", true);
                 boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
                 holding = true;
-                boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
-                boxInst.transform.parent = gameObject.transform;
+
+            //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
+            //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
+                if (facingRight)
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f , -1.0f);
+                else
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
+            boxInst.transform.parent = gameObject.transform;
                 boxInst.GetComponent<Rigidbody2D>().simulated = false;
         }
         
