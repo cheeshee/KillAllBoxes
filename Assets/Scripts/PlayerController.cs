@@ -189,8 +189,8 @@ public class PlayerController : PhysicsObject
         {
             
 			if (boxInst.transform.parent != null) {
-				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
 				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
+				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
 				boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
             }
 
