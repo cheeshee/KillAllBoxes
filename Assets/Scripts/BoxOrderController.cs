@@ -86,6 +86,7 @@ public class BoxOrderController : MonoBehaviour
         BoxController order = new BoxController();
 
         int status = Random.Range(0, 4);
+        int type = Random.Range(0, 3);
         int bubbleRNG = Random.Range(0, 2);
         if (status != 3)
         {
@@ -94,6 +95,17 @@ public class BoxOrderController : MonoBehaviour
         if (bubbleRNG == 0)
         {
             order.attributes[order.fields[3]] = true;
+        }
+        switch (type)
+        {
+            case 1:
+                order.isHeavy = true;
+                break;
+            case 2:
+                order.isFragile = true;
+                break;
+            default:
+                break;
         }
         orders.Add(order);
     }
