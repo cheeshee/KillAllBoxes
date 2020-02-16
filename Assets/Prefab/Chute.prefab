@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2680075251543462168}
   - component: {fileID: 2680075251543462175}
   - component: {fileID: 5499135476639781576}
+  - component: {fileID: -624913350938968004}
   m_Layer: 0
   m_Name: Chute
   m_TagString: Untagged
@@ -107,3 +108,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7481125, y: 0.86334115}
   m_EdgeRadius: 0
+--- !u!95 &-624913350938968004
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680075251543462174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba4aad708e7f7e44fbb1f9e140a3e6ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
