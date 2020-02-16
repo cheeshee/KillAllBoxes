@@ -94,12 +94,26 @@ public class BoxOrderController : MonoBehaviour
 
     void GenerateOrder()
     {
-        GameObject currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
+        int type = Random.Range(0, 3);
+        GameObject currentBox;
+        switch (type)
+        {
+            case 1:
+                currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.HEAVY_BOX, transform.position, Quaternion.identity);
+                currentBox.GetComponent<BoxController>().isHeavy = true;
+                break;
+            case 2:            
+                currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.FRAGILE_BOX, transform.position, Quaternion.identity);
+                currentBox.GetComponent<BoxController>().isFragile = true;
+                break;
+            default:
+                currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
+                break;
+        }
         BoxController order = currentBox.GetComponent<BoxController>();
         currentBox.SetActive(false);
         order.OnObjectSpawn();
         int status = Random.Range(0, 4);
-        int type = Random.Range(0, 3);
         int bubbleRNG = Random.Range(0, 2);
         if (status != 3)
         {
@@ -108,17 +122,6 @@ public class BoxOrderController : MonoBehaviour
         if (bubbleRNG == 0)
         {
             order.attributes[order.fields[3]] = true;
-        }
-        switch (type)
-        {
-            case 1:
-                order.isHeavy = true;
-                break;
-            case 2:
-                order.isFragile = true;
-                break;
-            default:
-                break;
         }
         Add(order);
         // Debug.Log("Order Created: " + order);

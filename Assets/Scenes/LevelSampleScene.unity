@@ -990,6 +990,16 @@ PrefabInstance:
       propertyPath: pools.Array.data[0].size
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5691538827854685968, guid: d283ab8b539bacc4bb56459ec8de9cdc,
+        type: 3}
+      propertyPath: pools.Array.data[1].size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691538827854685968, guid: d283ab8b539bacc4bb56459ec8de9cdc,
+        type: 3}
+      propertyPath: pools.Array.data[2].size
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d283ab8b539bacc4bb56459ec8de9cdc, type: 3}
 --- !u!1 &814147795
