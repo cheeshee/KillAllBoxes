@@ -8,6 +8,7 @@ TagManager:
   - Wrapping
   - Ladder
   - Chute
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
@@ -42,6 +43,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2160702951
+    locked: 0
+  - name: Environment
+    uniqueID: 820394363
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1347724135
     locked: 0
