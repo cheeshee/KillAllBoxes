@@ -77,10 +77,6 @@ public class PlayerController : PhysicsObject
             gravityModifier = 0;
         }
 
-        idleboolean = Mathf.Abs(velocity.x) > 0;
-        gameObject.GetComponent<Animator>().SetBool("moving", idleboolean);
-
-        /*
         if (Mathf.Abs(velocity.x) > 0)
         {
             gameObject.GetComponent<Animator>().SetBool("moving", true);
@@ -89,7 +85,6 @@ public class PlayerController : PhysicsObject
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
         }
-        */
 
         targetVelocity = move * maxSpeed * speedModifier;
     }
@@ -124,6 +119,8 @@ public class PlayerController : PhysicsObject
 
     private void checkBoxInRange() {
 
+        Debug.Log("Running Pytha Check");
+
         BoxController[] boxes = FindObjectsOfType<BoxController>();
 
         if (boxes.Length > 0 && !holding) {
@@ -148,9 +145,9 @@ public class PlayerController : PhysicsObject
             {
                 inGrabRange = true;
             }
-        }
-        else {
-            inGrabRange = false;
+            else {
+                inGrabRange = false;
+            }
         }
     }
 
