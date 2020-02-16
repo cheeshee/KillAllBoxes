@@ -7,7 +7,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = {"blueSticker", "redSticker", "whiteSticker",
+    public string[] fields = {"stickerBlue", "stickerRed", "stickerWhite",
                               "bubbleWrap"}; //test for push
     // Start is called before the first frame update
     public bool isHeavy = false;
@@ -48,7 +48,7 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             
 
-            attributes["wrapping"] = true;
+            //attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(2, false, spriteApply);
 
@@ -57,7 +57,7 @@ public class BoxController : PhysicsObject, IPooledObject
         if (col.tag == Tags.STICKER)
         {
 
-            attributes["sticker"] = true;
+            //attributes["sticker"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(1, true, spriteApply);
 
@@ -98,21 +98,31 @@ public class BoxController : PhysicsObject, IPooledObject
 
         List<string> keys = new List<string>(attributes.Keys);
 
-        foreach (string key in keys)
+
+        Debug.Log("Currently updating " + spriteApply);
+
+        switch (spriteApply)
         {
-          
-            if (key != "bubbleWrap")
-            {
-                attributes[key] = false;
-            }
-            if (key == spriteApply)
-            {
-
-                attributes[key] = true;
-
-            }
+            case "stickerBlue":
+                attributes["stickerRed"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerRed":
+                attributes["stickerBlue"] = false;
+                attributes["stickerWhite"] = false;
+                break;
+            case "stickerWhite":
+                attributes["stickerRed"] = false;
+                attributes["stickerBlue"] = false;
+                break;
+            case "bubbleWrap":
+                break;
+            default:
+                break;
 
         }
+        attributes[spriteApply] = true;
+        Debug.Log(spriteApply + " is " + attributes[spriteApply]);
 
     }
 }

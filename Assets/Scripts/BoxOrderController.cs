@@ -40,17 +40,20 @@ public class BoxOrderController : MonoBehaviour
             completed = true;
             foreach (string key in order.fields)
             {
-                Debug.Log("Current box field" + key + " is: " + currentBox.attributes[key]);
-                Debug.Log("Order box field" + key + " is: " + order.attributes[key]);
+                Debug.Log("Current box field " + key + " is: " + currentBox.attributes[key]);
+                Debug.Log("Order box field " + key + " is: " + order.attributes[key]);
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
                     completed = false;
+                    Debug.Log("Failed this order");
                     break;
                 }
                 
             }
+            Debug.Log("Fragile: " + currentBox.isFragile);
+            Debug.Log("Heavy: " + currentBox.isHeavy); 
 
-            if (completed && order.isFragile == currentBox.isFragile && order.isHeavy == currentBox.isHeavy)
+            if (completed && (order.isFragile == currentBox.isFragile) && (order.isHeavy == currentBox.isHeavy))
             {
                 correctOrder = order;
                 break;
@@ -71,7 +74,9 @@ public class BoxOrderController : MonoBehaviour
 
     private void Remove (BoxController box )
     {
+        Debug.Log(orders.Count);
         orders.Remove(box);
+        Debug.Log(orders.Count);
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();

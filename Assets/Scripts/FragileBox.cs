@@ -7,6 +7,6 @@ public class FragileBox : BoxController
     public override void OnObjectSpawn()
     {
         base.OnObjectSpawn();
-        isHeavy = true;
+        isFragile = true;
     }
 }
