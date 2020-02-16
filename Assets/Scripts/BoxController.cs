@@ -49,14 +49,14 @@ public class BoxController : MonoBehaviour
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            Change_Pattern(1, Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply));
-            Debug.Log("Changing Sticker");
+            Change_Pattern(1, Resources.Load<Sprite>("./Sprites/" + col.gameObject.GetComponent<FloorController>().apply), Texture2D);
+            Debug.Log("Changing Sticker to: " + "Sprites/" + col.gameObject.GetComponent<FloorController>().apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            Change_Pattern(2, Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply));
+            Change_Pattern(2, Resources.Load<Sprite>("Sprites/" + col.gameObject.GetComponent<FloorController>().apply), Sprite);
             Debug.Log("Changing Wrapper");
 
         }
@@ -65,6 +65,8 @@ public class BoxController : MonoBehaviour
 
     void Change_Pattern(int index, Sprite apply){
 
+        Debug.Log("Changing Sprite To: " + apply);
+        pattern[index].sprite = apply;
         pattern[index].gameObject.transform.position.z.Equals(-1);
         pattern[index].enabled = true;
 
