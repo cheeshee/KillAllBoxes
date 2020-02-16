@@ -54,6 +54,9 @@ public class PlayerController : PhysicsObject
         if(checkrange){
             checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
         }
+        else{
+            inGrabRange = false;
+        }
         if (InputManager.IsShipping(playerNumber)) //if player presses button
         {
             pickUpBox();
