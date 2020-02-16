@@ -13,7 +13,7 @@ public class FloorController : MonoBehaviour
     public Dictionary<string, bool> wrappers;
     */
 
-    [Header("Sticker/Wrapper")];
+    [Header("Sticker/Wrapper")]
     public string apply; 
 
     void Start(){
