@@ -14,11 +14,11 @@ public class PlayerController : PhysicsObject
     public bool holding;
 
     private float range = 0.5f;
-
+    /*
     [SerializeField] private float seconds = 0.5f;
-    [SerializeField] private float alarm = 50.0f;
+    [SerializeField] private float alarm = 2.5f;
     [SerializeField] private float timer = 0.0f;
-
+    */
     [Header("2DVec")]
     protected Vector2 move;
 
@@ -64,12 +64,12 @@ public class PlayerController : PhysicsObject
         }
 
         checkBoxInRange(); //uses pythagoreaon to check for closest box in range. (Using this since original collider idea didnt seem to work)
-        if (InputManager.IsShipping(playerNumber) && timer >= alarm) //if player presses button
+        if (InputManager.IsShipping(playerNumber)) //if player presses button && timer >= alarm
         {
             pickUpBox();
-            timer = 0.0f; //reset delay, else bug occurs where players mass drop and pick up boxes
+            //timer = 0.0f; //reset delay, else bug occurs where players mass drop and pick up boxes
         }
-        timer += seconds;
+        //timer += seconds;
     }
 
     protected override void ComputeVelocity()
@@ -187,29 +187,43 @@ public class PlayerController : PhysicsObject
 
     private void pickUpBox() {
 
-        if (holding)
-        {
-            boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
-            boxInst.transform.parent = null;
-            holding = false;
-            boxInst.GetComponent<Rigidbody2D>().simulated = true;
-            speedModifier = 1f;
+
+		if (holding)
+		{
+			boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
+			boxInst.transform.parent = null;
+			holding = false;
+			boxInst.GetComponent<Rigidbody2D>().simulated = true;
+			gameObject.GetComponent<Animator>().SetBool("holding", false);
+			speedModifier = 1f;
         }
-        else if(inGrabRange && !holding)
+            else if(inGrabRange && !holding)
         {
             
-            if (boxInst.transform.parent != null) {
-                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
-                boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
+                if (boxInst.transform.parent != null) {
+                    boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
+                    boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
+                    boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
             }
-               
-                
-            boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
-            holding = true;
-            boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
+
+
+                gameObject.GetComponent<Animator>().SetBool("holding", true);
+                boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
+                holding = true;
+
+            //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
+            //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
+                if (facingRight)
+				{
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f , -1.0f);
+				}
+                else
+				{
+                    boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
+				}
             boxInst.transform.parent = gameObject.transform;
             boxInst.GetComponent<Rigidbody2D>().simulated = false;
-            if (boxInst.isBoxHeavy())
+			if (boxInst.isBoxHeavy())
             {
                 speedModifier = heavyBoxModifier;
             }

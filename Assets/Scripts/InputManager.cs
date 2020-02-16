@@ -45,9 +45,9 @@ public static class InputManager{
     public static bool IsShipping(int player)
     {
         if (player == 1)
-            return Input.GetButton("Ship1");
+            return Input.GetButtonDown("Ship1");
         else if (player == 2)
-            return Input.GetButton("Ship2");
+            return Input.GetButtonDown("Ship2");
         else
             return false;
     }
