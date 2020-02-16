@@ -79,6 +79,15 @@ public class PlayerController : PhysicsObject
             gravityModifier = 0;
         }
 
+        if (Mathf.Abs(velocity.x) > 0)
+        {
+            gameObject.GetComponent<Animator>().SetBool("moving", true);
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().SetBool("moving", false);
+        }
+
         targetVelocity = move * maxSpeed;
     }
 
