@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2874302505050883631}
   - component: {fileID: 870048777113856171}
   m_Layer: 0
-  m_Name: GreenStickerStation
-  m_TagString: Untagged
+  m_Name: stickerWhite
+  m_TagString: Sticker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
