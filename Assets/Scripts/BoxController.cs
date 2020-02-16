@@ -8,7 +8,7 @@ public class BoxController : MonoBehaviour
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
     public string[] fields = {"blueSticker", "redSticker", "whiteSticker", 
-                              "bubbleWrap"};
+                              "bubbleWrap"}; //test for push
     // Start is called before the first frame update
     [SerializeField] private SpriteRenderer[] pattern;
 
@@ -19,17 +19,13 @@ public class BoxController : MonoBehaviour
         foreach (string attribute in fields)
         {
             attributes.Add(attribute, false);
+            Debug.Log(attribute);
         }
     }
     
     void Start(){
 
-        //For Testing
-        attributes = new Dictionary<string, bool>();
-        foreach (string attribute in fields)
-        {
-            attributes.Add(attribute, false);
-        }
+        OnObjectSpawn();
 
         pattern = GetComponentsInChildren<SpriteRenderer>();
 
@@ -66,12 +62,14 @@ public class BoxController : MonoBehaviour
     void Update_Attributes(string apply){
 
         Debug.Log("###Updating Attribute###");
+        Debug.Log(apply);
 
         foreach(KeyValuePair<string, bool> attrib in attributes){
 
             if(attrib.Key == apply){
 
                 attributes[attrib.Key] = true;
+                Debug.Log(attrib.Key + ": " + attrib.Value);
             
             }
 
