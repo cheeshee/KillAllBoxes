@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : PhysicsObject, IPooledObject
+public class BoxController : MonoBehaviour, IPooledObject
 {
 
     [Header("Box Attributes")]
@@ -66,7 +66,7 @@ public class BoxController : PhysicsObject, IPooledObject
 
     }
 
-    protected override void Start()
+    protected virtual void Start()
     {
 
         //OnObjectSpawn();
