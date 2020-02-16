@@ -33,26 +33,37 @@ public class BoxOrderController : MonoBehaviour
     public void CheckBox(BoxController currentBox)
     {
 
+        BoxController correctOrder = null;
+        bool completed = true;
         foreach (BoxController order in orders)
         {
+            completed = true;
             foreach (string key in order.fields)
             {
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
-
-                    Debug.Log("Incorrect!");
-                    //Lose the game
+                    completed = false;
                     break;
-                
                 }
-                else if(order.attributes[key] == currentBox.attributes[key]){
                 
-                    Debug.Log("Correct!");
-                    //Play a sound
-                    break;
-                
-                }
             }
+
+            if (completed && order.isFragile == currentBox.isFragile && order.isHeavy == currentBox.isHeavy)
+            {
+                correctOrder = order;
+                break;
+            }
+        }
+
+        currentBox.gameObject.SetActive(false);
+
+        if (correctOrder != null)
+        {
+            Remove(correctOrder);
+            Debug.Log("Correct");
+        } else
+        {
+            Debug.Log("failed");
         }
     }
 
