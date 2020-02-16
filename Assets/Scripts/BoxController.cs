@@ -13,7 +13,7 @@ public class BoxController : PhysicsObject, IPooledObject
     public bool isHeavy = false;
     public bool isFragile = false;
     public bool isSafe = true;
-    [SerializeField] private List<SpriteRenderer> pattern; 
+    [SerializeField] private SpriteRenderer[] pattern; 
 
 
     public virtual void OnObjectSpawn()
@@ -48,12 +48,12 @@ public class BoxController : PhysicsObject, IPooledObject
 
         //}
 
-        foreach(SpriteRenderer sprite in pattern){
+        //foreach(SpriteRenderer sprite in pattern){
 
-            sprite.enabled = false;
-            sprite.sortingOrder = 1;
-            
-        }
+        //    sprite.enabled = false;
+        //    sprite.sortingOrder = 1;
+
+        //}
 
     }
 
