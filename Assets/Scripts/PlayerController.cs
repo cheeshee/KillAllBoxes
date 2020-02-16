@@ -14,9 +14,9 @@ public class PlayerController : PhysicsObject
 
     private float range = 2.0f;
 
-    private float seconds = 0.5f;
-    private float alarm = 15.0f;
-    private float timer = 0.0f;
+    [SerializeField] private float seconds = 0.5f;
+    [SerializeField] private float alarm = 50.0f;
+    [SerializeField] private float timer = 0.0f;
 
     [Header("2DVec")]
     protected Vector2 move;
@@ -62,9 +62,6 @@ public class PlayerController : PhysicsObject
     {
         move = Vector2.zero;
         move.x = InputManager.GetHorizontal(playerNumber);
-
-
-
 
         if (onLadder && InputManager.GetVertical(playerNumber) != 0) 
         {
