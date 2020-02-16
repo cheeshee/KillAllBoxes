@@ -6,13 +6,11 @@ public class PlayerController : PhysicsObject
 {
     [Header("BoxController")]
     public BoxController boxInst;
-    [SerializeField] private BoxController currentlyHeldBox;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
     [SerializeField] private bool grabLadder;
     [SerializeField] private bool idleboolean;
-    [SerializeField] private float idleresult;
     public bool inGrabRange;
     public bool holding;
 
@@ -23,19 +21,11 @@ public class PlayerController : PhysicsObject
     protected Vector2 move;
 
     [Header("Values")]
-    [SerializeField]
-    protected float jumpTakeOffSpeed;
-    [SerializeField]
-    protected int playerNumber = 1;
-    [SerializeField]
-    protected float maxSpeed = 1.6f;
-    [SerializeField]
-    private float ladderSpeed = 3;
-    [SerializeField]
-    private float heavyBoxModifier = 0.5f;
-
+    [SerializeField] protected int playerNumber = 1;
+    [SerializeField] protected float maxSpeed = 1.6f;
+    [SerializeField] private float ladderSpeed = 3;
+    [SerializeField] private float heavyBoxModifier = 0.5f;
     private float speedModifier = 1f;
-
     public bool facingRight = true;
 
 
