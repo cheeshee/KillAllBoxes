@@ -131,24 +131,25 @@ public class PlayerController : PhysicsObject
         BoxController[] boxes = FindObjectsOfType<BoxController>();
         if (boxes.Length > 0) {
             boxInst = boxes[0];
-        }
-        for (int i = 1; i < boxes.Length; i++) {
-            //pythagorean to check which boxes are closest
-            float x1 = Mathf.Pow(boxes[i].transform.position.x - gameObject.transform.position.x, 2);
-            float y1 = Mathf.Pow(boxes[i].transform.position.y - gameObject.transform.position.y, 2);
-            float x2 = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
-            float y2 = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
+        
+            for (int i = 1; i < boxes.Length; i++) {
+                //pythagorean to check which boxes are closest
+                float x1 = Mathf.Pow(boxes[i].transform.position.x - gameObject.transform.position.x, 2);
+                float y1 = Mathf.Pow(boxes[i].transform.position.y - gameObject.transform.position.y, 2);
+                float x2 = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
+                float y2 = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
 
-            if (x1 + y1 < x2 + y2) {
-                boxInst = boxes[i];
+                if (x1 + y1 < x2 + y2) {
+                    boxInst = boxes[i];
+                }
             }
-        }
-        float x = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
-        float y = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
+            float x = Mathf.Pow(boxInst.transform.position.x - gameObject.transform.position.x, 2);
+            float y = Mathf.Pow(boxInst.transform.position.y - gameObject.transform.position.y, 2);
 
-        if (x + y <= Mathf.Pow(range, 2))
-        {
-            inGrabRange = true;
+            if (x + y <= Mathf.Pow(range, 2))
+            {
+                inGrabRange = true;
+            }
         }
         else {
             inGrabRange = false;
