@@ -84,10 +84,11 @@ public class BoxOrderController : MonoBehaviour
         {
             Remove(correctOrder);
             Debug.Log("Correct");
+            GameObject.Find("Chute").GetComponent<Animator>().SetBool("correct", true);
         } else
         {
-            //GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,1);
-            GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().SetTrigger("IncorrectPackage");
+
+            GameObject.Find("Chute").GetComponent<Animator>().SetBool("correct", false);
             scoring.subtractScore(20);
             Debug.Log("Failed");
         }
