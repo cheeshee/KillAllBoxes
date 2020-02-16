@@ -35,49 +35,46 @@ public class BoxController : PhysicsObject
 
         Debug.Log("Box Entered Collision");
 
-        string apply = col.gameObject.GetComponent<FloorController>().apply;
+        string spriteApply = col.gameObject.name;
 
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(1, true, apply);
+            Update_Attributes(spriteApply);
+            Change_Pattern(1, true, spriteApply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(2, false, apply);
+            Update_Attributes(spriteApply);
+            Change_Pattern(2, false, spriteApply);
 
         }
 
     }
 
-    protected virtual void Change_Pattern(int index, bool sticker, string apply){
+    protected virtual void Change_Pattern(int index, bool sticker, string spriteApply){
 
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
+        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
         pattern[index].enabled = true;
 
     } 
 
-    void Update_Attributes(string apply){
+    void Update_Attributes(string spriteApply){
 
         Debug.Log("###Updating Attribute###");
-        Debug.Log(apply);
+        Debug.Log(spriteApply);
 
         List<string> keys = new List<string>(attributes.Keys);
 
         foreach(string key in keys){
 
-            if(key == apply){
+            attributes[key] = false;
+
+            if(key == spriteApply){
 
                 attributes[key] = true;
-
-            }
-            else{
-
-                attributes[key] = false;
 
             }
 
