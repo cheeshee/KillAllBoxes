@@ -100,12 +100,15 @@ public class BoxController : PhysicsObject, IPooledObject
 
         foreach (string key in keys)
         {
-            
+          
+            if (key != "bubbleWrap")
+            {
+                attributes[key] = false;
+            }
             if (key == spriteApply)
             {
 
                 attributes[key] = true;
-                break;
 
             }
 

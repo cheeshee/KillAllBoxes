@@ -40,6 +40,8 @@ public class BoxOrderController : MonoBehaviour
             completed = true;
             foreach (string key in order.fields)
             {
+                Debug.Log("Current box field" + key + " is: " + currentBox.attributes[key]);
+                Debug.Log("Order box field" + key + " is: " + order.attributes[key]);
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
                     completed = false;
