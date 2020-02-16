@@ -32,51 +32,41 @@ public class BoxController : MonoBehaviour
 
          foreach(SpriteRenderer pat in pattern){
 
-            pat.enabled = false;
+             if(pat.name != "PlaceHolder_Box"){
+
+                 pat.enabled = false;
+
+             }
 
          }
 
     }
 
-    void FixedUpdate(){
-
-        Change_Active();
-
-    }
-
-    void Change_Active(){
-
-        foreach(KeyValuePair<string, bool> pair in attributes){
-
-            if(pair.Key == "bubble"){
-
-                pattern[1].enabled = pair.Value;
-
-            }
-            else if(pair.Key == "wrapping"){
-
-                pattern[2].enabled = pair.Value;
-
-            }
-
-        }
-
-    }
-
     void OnCollisionEnter2D(Collision2D col){
+
+        Debug.Log("Box Entered Collision");
 
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
-            pattern[1].sprite = Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply);
+            Change_Pattern(1, Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply));
+            Debug.Log("Changing Sticker");
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
-            pattern[2].sprite = Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply);
+            Change_Pattern(2, Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply));
+            Debug.Log("Changing Wrapper");
 
         }
+
+    }
+
+    void Change_Pattern(int index, Sprite apply){
+
+        pattern[index].gameObject.transform.position.z.Equals(-1);
+        pattern[index].enabled = true;
 
     }
 
