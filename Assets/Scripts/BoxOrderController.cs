@@ -107,6 +107,6 @@ public class BoxOrderController : MonoBehaviour
             default:
                 break;
         }
-        orders.Add(order);
+        Add(order);
     }
 }
