@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 274501237}
   - component: {fileID: 274501238}
+  - component: {fileID: 274501239}
   m_Layer: 0
   m_Name: ChangeBox
   m_TagString: Untagged
@@ -177,6 +178,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.0215535}
   m_EdgeRadius: 0
+--- !u!114 &274501239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274501236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd0804d9737df647bae8f492c8ff151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sticker: 0
+  apply: 
 --- !u!1 &796893085
 GameObject:
   m_ObjectHideFlags: 0

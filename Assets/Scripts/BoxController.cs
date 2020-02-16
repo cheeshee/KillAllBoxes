@@ -30,6 +30,12 @@ public class BoxController : MonoBehaviour
 
          pattern = GetComponentsInChildren<SpriteRenderer>();
 
+         foreach(SpriteRenderer pat in pattern){
+
+            pat.enabled = false;
+
+         }
+
     }
 
     void FixedUpdate(){
@@ -62,31 +68,16 @@ public class BoxController : MonoBehaviour
         if(col.collider.tag == Tags.STICKER){
 
             attributes["sticker"] = true;
+            pattern[1].sprite = Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply);
 
         }
         if(col.collider.tag == Tags.WRAPPING){
 
             attributes["wrapping"] = true;
+            pattern[2].sprite = Resources.Load<Sprite>(col.gameObject.GetComponent<FloorController>().apply);
 
         }
 
     }
-
-    void OnCOllisionExit2D(Collision2D col){
-        
-        if(col.collider.tag == Tags.STICKER){
-
-            attributes["sticker"] = false;
-
-        }
-        if(col.collider.tag == Tags.WRAPPING){
-
-            attributes["wrapping"] = false;
- 
-        }
-
-
-    }
-
 
 }
