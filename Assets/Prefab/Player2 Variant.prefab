@@ -87,6 +87,17 @@ PrefabInstance:
       propertyPath: playerNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1291408253310708080, guid: 9660a868999a5db499f3951c4395714c,
+        type: 3}
+      propertyPath: boxInst
+      value: 
+      objectReference: {fileID: 4065553641380120644, guid: b105ef77ec308584bacec09580e808ca,
+        type: 3}
+    - target: {fileID: 1291408253310708081, guid: 9660a868999a5db499f3951c4395714c,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1291408253310708082, guid: 9660a868999a5db499f3951c4395714c,
         type: 3}
       propertyPath: m_Offset.x
@@ -106,11 +117,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 0.5374131
-      objectReference: {fileID: 0}
-    - target: {fileID: 1291408253310708081, guid: 9660a868999a5db499f3951c4395714c,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 335723691, guid: 9660a868999a5db499f3951c4395714c, type: 3}
       propertyPath: m_Controller

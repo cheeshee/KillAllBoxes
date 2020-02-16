@@ -30,23 +30,26 @@ public class BoxController : PhysicsObject, IPooledObject
 
         OnObjectSpawn();
 
-        pattern = GetComponentsInChildren<SpriteRenderer>();
+        foreach(Transform child in transform){
 
-        //foreach(Transform child in transform){
+            if(child.gameObject.name == "bubbleWrap"){
 
-        //    if(child.gameObject.name == "Wrapper"){
+                pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
+                continue;
 
-        //        pattern.Add(child.gameObject.GetComponent<SpriteRenderer>());
-        //        continue;
+            }
+            else{
 
-        //    }
-        //    for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 3; i++){
 
-        //        pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
+                    pattern.Add(child.GetChild(i).GetComponent<SpriteRenderer>());
 
-        //    }
+                }
 
-        //}
+
+            }
+
+        }
 
         foreach(SpriteRenderer sprite in pattern){
 
@@ -160,26 +163,17 @@ public class BoxController : PhysicsObject, IPooledObject
 
         Debug.Log("Currently updating " + spriteApply);
 
-        switch (spriteApply)
-        {
-            case "stickerBlue":
-                attributes["stickerRed"] = false;
-                attributes["stickerWhite"] = false;
-                break;
-            case "stickerRed":
-                attributes["stickerBlue"] = false;
-                attributes["stickerWhite"] = false;
-                break;
-            case "stickerWhite":
-                attributes["stickerRed"] = false;
-                attributes["stickerBlue"] = false;
-                break;
-            case "bubbleWrap":
-                break;
-            default:
-                break;
+        foreach(string key in keys){
+
+            if(key == spriteApply){
+
+                attributes[key] = true;
+
+            }
 
         }
+
+
         attributes[spriteApply] = true;
         Debug.Log(spriteApply + " is " + attributes[spriteApply]);
 
