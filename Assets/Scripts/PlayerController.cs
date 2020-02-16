@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-    [SerializeField] private GameObject boxInst;
+    [SerializeField] private BoxController boxInst;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
@@ -164,18 +164,18 @@ public class PlayerController : PhysicsObject
 
             if (holding)
             {
+                boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
                 boxInst.transform.parent = null;
                 holding = false;
-                boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
-                //boxInst.GetComponent<Rigidbody2D>().simulated = true;
+                boxInst.GetComponent<Rigidbody2D>().simulated = true;
             }
             else if(inGrabRange && !holding)
-            {
-                holding = true;
-                boxInst.transform.position = gameObject.transform.position;
-                boxInst.transform.parent = gameObject.transform;
+        {
                 boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
-            //boxInst.GetComponent<Rigidbody2D>().simulated = false;
+                holding = true;
+                boxInst.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.0f , -1.0f);
+                boxInst.transform.parent = gameObject.transform;
+                boxInst.GetComponent<Rigidbody2D>().simulated = false;
         }
         
     }
