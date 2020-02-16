@@ -4,36 +4,26 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
+    [Header("BoxController")]
     public BoxController boxInst;
-    private BoxController currentlyHeldBox;
 
     [Header("Boolean")]
     [SerializeField] private bool onLadder;
     [SerializeField] private bool grabLadder;
+    [SerializeField] private bool idleboolean;
     public bool inGrabRange;
     public bool holding;
-
-    private float range = 0.5f;
+    [SerializeField] private float range = 0.5f;
 
     [Header("2DVec")]
     protected Vector2 move;
 
     [Header("Values")]
-    [SerializeField]
-    protected float jumpTakeOffSpeed;
-    [SerializeField]
-    protected int playerNumber = 1;
-    [SerializeField]
-    protected float maxSpeed = 1.6f;
-    [SerializeField]
-    private float ladderSpeed = 3;
-    [SerializeField]
-    private float heavyBoxModifier = 0.5f;
-
+    [SerializeField] protected int playerNumber = 1;
+    [SerializeField] protected float maxSpeed = 1.6f;
+    [SerializeField] private float ladderSpeed = 3;
+    [SerializeField] private float heavyBoxModifier = 0.5f;
     private float speedModifier = 1f;
-
-
-
     public bool facingRight = true;
 
 
@@ -48,6 +38,7 @@ public class PlayerController : PhysicsObject
     protected override void FixedUpdate(){
 
         base.FixedUpdate();
+
         if (InputManager.GetHorizontal(playerNumber) < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -63,7 +54,6 @@ public class PlayerController : PhysicsObject
         if (InputManager.IsShipping(playerNumber)) //if player presses button
         {
             pickUpBox();
-
         }
     }
 
@@ -128,11 +118,16 @@ public class PlayerController : PhysicsObject
     */
 
     private void checkBoxInRange() {
+
+        Debug.Log("Running Pytha Check");
+
         BoxController[] boxes = FindObjectsOfType<BoxController>();
+
         if (boxes.Length > 0 && !holding) {
             boxInst = boxes[0];
         
             for (int i = 1; i < boxes.Length; i++) {
+
                 //pythagorean to check which boxes are closest
                 float x1 = Mathf.Pow(boxes[i].transform.position.x - gameObject.transform.position.x, 2);
                 float y1 = Mathf.Pow(boxes[i].transform.position.y - gameObject.transform.position.y, 2);
@@ -150,9 +145,9 @@ public class PlayerController : PhysicsObject
             {
                 inGrabRange = true;
             }
-        }
-        else {
-            inGrabRange = false;
+            else {
+                inGrabRange = false;
+            }
         }
     }
 
@@ -180,16 +175,18 @@ public class PlayerController : PhysicsObject
 		if (holding)
 		{
 			boxInst.GetComponent<BoxCollider2D>().isTrigger = false;
-			boxInst.transform.parent = null;
-			holding = false;
-			boxInst.GetComponent<Rigidbody2D>().simulated = true;
+            boxInst.GetComponent<Rigidbody2D>().simulated = true;
 			gameObject.GetComponent<Animator>().SetBool("holding", false);
+			
+            boxInst.transform.parent = null;
+			holding = false;
 			speedModifier = 1f;
         }
         else if(inGrabRange && !holding)
         {
             
 			if (boxInst.transform.parent != null) {
+
 				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().holding = false;
 				boxInst.transform.parent.gameObject.GetComponent<PlayerController>().boxInst = null;
 				boxInst.transform.parent.gameObject.GetComponent<Animator>().SetBool("holding", false);
@@ -198,12 +195,15 @@ public class PlayerController : PhysicsObject
 
 
 			gameObject.GetComponent<Animator>().SetBool("holding", true);
+
 			boxInst.GetComponent<BoxCollider2D>().isTrigger = true;
-			holding = true;
+			
+            holding = true;
 
             //Mathf.Sign(gameObject.transform.position.x - boxInst.transform.position.x)
             //boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
-			if (facingRight)
+		
+        	if (facingRight)
 			{
 				boxInst.transform.position = gameObject.transform.position + new Vector3(0.25f, 0.22f , -1.0f);
 			}
@@ -211,12 +211,15 @@ public class PlayerController : PhysicsObject
 			{
 				boxInst.transform.position = gameObject.transform.position + new Vector3(-0.25f, 0.22f, -1.0f);
 			}
+        
             boxInst.transform.parent = gameObject.transform;
             boxInst.GetComponent<Rigidbody2D>().simulated = false;
-			if (boxInst.isBoxHeavy())
+		
+        	if (boxInst.isBoxHeavy())
             {
                 speedModifier = heavyBoxModifier;
             }
+        
         }
         
     }
