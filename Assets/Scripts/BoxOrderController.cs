@@ -85,7 +85,7 @@ public class BoxOrderController : MonoBehaviour
             Debug.Log("Correct");
         } else
         {
-            GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().SetTrigger("IncorrectPackage");
+            //GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().SetTrigger("IncorrectPackage");
             scoring.subtractScore(20);
             Debug.Log("Failed");
         }
