@@ -48,27 +48,41 @@ public class BoxController : PhysicsObject, IPooledObject
             Change_Pattern(1, true, spriteApply);
 
         }
-        if (col.collider.tag == Tags.WRAPPING)
+        // if (col.collider.tag == Tags.WRAPPING)
+        // {
+
+        //     attributes["wrapping"] = true;
+        //     Update_Attributes(spriteApply);
+        //     Change_Pattern(2, false, spriteApply);
+
+        // }
+        
+
+    }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.tag == Tags.WRAPPING)
         {
+            
+            string spriteApply = col.gameObject.name;
 
             attributes["wrapping"] = true;
             Update_Attributes(spriteApply);
             Change_Pattern(2, false, spriteApply);
 
         }
-        
-
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D collision)
-    {
-            Debug.Log("EnteredChute");
-        if (collision.tag == Tags.CHUTE)
-        {
-            GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
+    // public void OnTriggerStay2D(Collider2D collision)
+    // {
+    //         Debug.Log("EnteredChute");
+    //     if (collision.tag == Tags.CHUTE)
+    //     {
+    //         GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
 
-        }
-    }
+    //     }
+    // }
 
     protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
     {
