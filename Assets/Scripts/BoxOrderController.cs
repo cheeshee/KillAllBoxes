@@ -86,7 +86,7 @@ public class BoxOrderController : MonoBehaviour
             Debug.Log("Correct");
         } else
         {
-            GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,1);
+            //GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,1);
             GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().SetTrigger("IncorrectPackage");
             scoring.subtractScore(20);
             Debug.Log("Failed");

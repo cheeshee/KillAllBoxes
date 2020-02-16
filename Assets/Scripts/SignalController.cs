@@ -7,14 +7,14 @@ public class SignalController : MonoBehaviour
 {
 
     // Update is called once per frame
-    void Update()
-    {
-        if(GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color.a == 1){
-            if(GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-            {
+    //void Update()
+    //{
+    //    if(GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color.a == 1){
+    //        if(GameObject.Find("GuiLargeSignals").GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+    //        {
 
-                GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,0);
-            }
-        }
-    }
+    //            GameObject.Find("GuiLargeSignals").GetComponentInChildren<Image>().color = new Color(255,255,255,0);
+    //        }
+    //    }
+    //}
 }
