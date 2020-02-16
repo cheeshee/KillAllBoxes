@@ -20,9 +20,7 @@ public class BoxController : PhysicsObject, IPooledObject
         attributes = new Dictionary<string, bool>();
         foreach (string attribute in fields)
         {
-            Debug.Log("Here 2");
             attributes.Add(attribute, false);
-            Debug.Log("Here 3");
         }
     }
     

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxOrderController : MonoBehaviour
 {
     private float timer = 0.0f;
-    private float alarm = 1000.0f;
+    private float alarm = 200.0f;
     private float seconds = 0.5f;
 
 
@@ -86,8 +86,10 @@ public class BoxOrderController : MonoBehaviour
 
     void GenerateOrder()
     {
-        BoxController order = new BoxController();
-
+        GameObject currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
+        BoxController order = currentBox.GetComponent<BoxController>();
+        currentBox.SetActive(false);
+        order.OnObjectSpawn();
         int status = Random.Range(0, 4);
         int type = Random.Range(0, 3);
         int bubbleRNG = Random.Range(0, 2);
@@ -121,6 +123,7 @@ public class BoxOrderController : MonoBehaviour
             GenerateOrder();
         }
         else {
+            //Debug.Log("timer = " +timer);
             timer += seconds;
         }
     }
