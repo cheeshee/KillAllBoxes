@@ -66,15 +66,19 @@ public class BoxController : PhysicsObject
         Debug.Log("###Updating Attribute###");
         Debug.Log(apply);
 
-        foreach(KeyValuePair<string, bool> attrib in attributes){
+        List<string> keys = new List<string>(attributes.Keys);
 
-            attributes[attrib.Key] = false;
+        foreach(string key in keys){
 
-            if(attrib.Key == apply){
+            if(key == apply){
 
-                attributes[attrib.Key] = true;
-                Debug.Log(attrib.Key + ": " + attrib.Value);
-            
+                attributes[key] = true;
+
+            }
+            else{
+
+                attributes[key] = false;
+
             }
 
         }
