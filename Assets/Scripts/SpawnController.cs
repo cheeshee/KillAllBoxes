@@ -16,15 +16,18 @@ public class SpawnController : MonoBehaviour
     private List<int> boxList;
     private int bombBox;
     private BoxController boxComponent;
-
+    private int boxCount;
+    [SerializeField]
+    private int maximumBoxCount = 9;
 
 
 // Start is called before the first frame update
-protected void Start()
+    protected void Start()
     {
         spawnRate = initialSpawnRate;
         lastSpawnedBoxTime = -spawnRate;
         boxSpawnNumber = 0;
+        boxCount = 0;
         generateNewList();
     }
 
@@ -32,7 +35,7 @@ protected void Start()
     protected void Update()
     {
 
-        if (Time.time > lastSpawnedBoxTime + spawnRate)
+        if (Time.time > lastSpawnedBoxTime + spawnRate && boxCount < maximumBoxCount)
         {
             if (boxList[boxSpawnNumber] % 3 == 0)
             {
@@ -55,6 +58,7 @@ protected void Start()
 
             boxComponent = box.GetComponent<BoxController>();
             boxComponent.OnObjectSpawn();
+            boxComponent.onBoxDeath += BoxOnDeath;
 
             if (boxSpawnNumber == bombBox)
             {
@@ -68,12 +72,16 @@ protected void Start()
                 boxSpawnNumber = 0;
             }
 
+            boxCount++;
+
             lastSpawnedBoxTime = Time.time;
         }
     }
 
-
-
+    void BoxOnDeath()
+    {
+        boxCount--;
+    }
 
 
 

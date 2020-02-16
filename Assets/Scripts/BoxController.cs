@@ -13,8 +13,11 @@ public class BoxController : PhysicsObject, IPooledObject
     public bool isHeavy = false;
     public bool isFragile = false;
     public bool isSafe = true;
-    [SerializeField] private List<SpriteRenderer> pattern; 
+    [SerializeField] private List<SpriteRenderer> pattern;
 
+
+    public delegate void BoxDelegate();
+    public BoxDelegate onBoxDeath;
 
     public virtual void OnObjectSpawn()
     {
@@ -136,7 +139,8 @@ public class BoxController : PhysicsObject, IPooledObject
         {
             //Debug.Log("BURN");
             //Object.Destroy(gameObject);
-            gameObject.SetActive(false);
+            onDeath();
+
         }
 
     }
@@ -191,5 +195,19 @@ public class BoxController : PhysicsObject, IPooledObject
 
         attributes[spriteApply] = true;
 
+    }
+
+
+
+
+
+
+
+
+    public virtual void onDeath()
+    {
+        onBoxDeath?.Invoke();
+        onBoxDeath = null;
+        gameObject.SetActive(false);
     }
 }
