@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7428706646458998862}
   - component: {fileID: 7428706646458998863}
   m_Layer: 0
-  m_Name: BubbleWrapStation
-  m_TagString: Untagged
+  m_Name: bubbleWrap
+  m_TagString: Wrapping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 09da3e0ebac82e048be4f013247adade, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13737c1e00ee05d489dba0860976d896, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

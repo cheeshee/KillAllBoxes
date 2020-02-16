@@ -20,19 +20,29 @@ public class OrderBehaviourTest : MonoBehaviour
         GameObject order = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
         BoxController currentBox = order.GetComponent<BoxController>();
         currentBox.OnObjectSpawn();
-        foreach (string key in currentBox.fields)
+        int status = Random.Range(0, 4);
+        int type = Random.Range(0, 3);
+        int bubbleRNG = Random.Range(0, 2);
+        if (status != 3)
         {
-            int status = Random.Range(0, 2);
-            if (status == 0)
-            {
-                currentBox.attributes[key] = false;
-            }
-            else
-            {
-                currentBox.attributes[key] = true;
-            }
+            currentBox.attributes[currentBox.fields[status]] = true;
         }
-        ShowDictionary(currentBox);
+        if (bubbleRNG == 0)
+        {
+            currentBox.attributes[currentBox.fields[3]] = true;
+        }
+        switch (type)
+        {
+            case 1:
+                currentBox.isHeavy = true;
+                break;
+            case 2:
+                currentBox.isFragile = true;
+                break;
+            default:
+                break;
+        }
+        Debug.Log("Here");
         BoxOrderController.instance.Add(currentBox);
     }
 

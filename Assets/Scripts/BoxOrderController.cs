@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BoxOrderController : MonoBehaviour
 {
+    private float timer = 0.0f;
+    private float alarm = 200.0f;
+    private float seconds = 0.5f;
+
+
     public List<BoxController> orders = new List<BoxController>();
     // Start is called before the first frame update
 
@@ -27,32 +32,27 @@ public class BoxOrderController : MonoBehaviour
 
     public void CheckBox(BoxController currentBox)
     {
-        bool completed = true;
-        BoxController checkedOrder = null;
+
         foreach (BoxController order in orders)
         {
             foreach (string key in order.fields)
             {
                 if (order.attributes[key] != currentBox.attributes[key]) 
                 {
-                    completed = false;
+
+                    Debug.Log("Incorrect!");
+                    //Lose the game
                     break;
+                
+                }
+                else if(order.attributes[key] == currentBox.attributes[key]){
+                
+                    Debug.Log("Correct!");
+                    //Play a sound
+                    break;
+                
                 }
             }
-            if (completed)
-            {
-                checkedOrder = order;
-                break;
-            }
-        }
-
-        if (checkedOrder != null)
-        {
-            Remove(checkedOrder);
-            // play sound
-        } else
-        {
-            // Penalty for incorrect box
         }
     }
 
@@ -83,9 +83,12 @@ public class BoxOrderController : MonoBehaviour
 
     void GenerateOrder()
     {
-        BoxController order = new BoxController();
-
+        GameObject currentBox = ObjectPooler.Instance.SpawnFromPool(Pool.NORMAL_BOX, transform.position, Quaternion.identity);
+        BoxController order = currentBox.GetComponent<BoxController>();
+        currentBox.SetActive(false);
+        order.OnObjectSpawn();
         int status = Random.Range(0, 4);
+        int type = Random.Range(0, 3);
         int bubbleRNG = Random.Range(0, 2);
         if (status != 3)
         {
@@ -95,6 +98,32 @@ public class BoxOrderController : MonoBehaviour
         {
             order.attributes[order.fields[3]] = true;
         }
-        orders.Add(order);
+        switch (type)
+        {
+            case 1:
+                order.isHeavy = true;
+                break;
+            case 2:
+                order.isFragile = true;
+                break;
+            default:
+                break;
+        }
+        Add(order);
+        Debug.Log("Order Created: " + order);
     }
+
+    private void Update()
+    {
+        if (timer >= alarm)
+        {
+            timer = 0.0f;
+            GenerateOrder();
+        }
+        else {
+            //Debug.Log("timer = " +timer);
+            timer += seconds;
+        }
+    }
+
 }

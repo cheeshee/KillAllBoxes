@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : PhysicsObject
+public class BoxController : PhysicsObject, IPooledObject
 {
 
     [Header("Box Attributes")]
     public Dictionary<string, bool> attributes;
-    public string[] fields = {"blueSticker", "redSticker", "whiteSticker", 
+    public string[] fields = {"blueSticker", "redSticker", "whiteSticker",
                               "bubbleWrap"}; //test for push
     // Start is called before the first frame update
+    public bool isHeavy = false;
+    public bool isFragile = false;
     [SerializeField] private SpriteRenderer[] pattern;
 
 
@@ -19,11 +21,11 @@ public class BoxController : PhysicsObject
         foreach (string attribute in fields)
         {
             attributes.Add(attribute, false);
-            Debug.Log(attribute);
         }
     }
-    
-    protected override void Start(){
+
+    protected override void Start()
+    {
 
         OnObjectSpawn();
 
@@ -31,58 +33,95 @@ public class BoxController : PhysicsObject
 
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D col){
+    protected virtual void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Entered Sticker" + col.collider.tag);
 
-        Debug.Log("Box Entered Collision");
+        // string spriteApply = col.gameObject.name;
 
-        string apply = col.gameObject.GetComponent<FloorController>().apply;
+        // if (col.collider.tag == Tags.STICKER)
+        // {
 
-        if(col.collider.tag == Tags.STICKER){
+        //     attributes["sticker"] = true;
+        //     Update_Attributes(spriteApply);
+        //     Change_Pattern(1, true, spriteApply);
 
-            attributes["sticker"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(1, true, apply);
+        // }
+        // if (col.collider.tag == Tags.WRAPPING)
+        // {
 
-        }
-        if(col.collider.tag == Tags.WRAPPING){
+        //     attributes["wrapping"] = true;
+        //     Update_Attributes(spriteApply);
+        //     Change_Pattern(2, false, spriteApply);
 
-            attributes["wrapping"] = true;
-            Update_Attributes(apply);
-            Change_Pattern(2, false, apply);
-
-        }
+        // }
+        
 
     }
 
-    protected virtual void Change_Pattern(int index, bool sticker, string apply){
+    void OnTriggerStay2D(Collider2D col)
+    {
+            string spriteApply = col.gameObject.name;
+        if (col.tag == Tags.WRAPPING)
+        {
+            
 
-        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, apply);
+            attributes["wrapping"] = true;
+            Update_Attributes(spriteApply);
+            Change_Pattern(2, false, spriteApply);
+
+        }
+
+        if (col.tag == Tags.STICKER)
+        {
+
+            attributes["sticker"] = true;
+            Update_Attributes(spriteApply);
+            Change_Pattern(1, true, spriteApply);
+
+        }
+    }
+
+    // public void OnTriggerStay2D(Collider2D collision)
+    // {
+    //         Debug.Log("EnteredChute");
+    //     if (collision.tag == Tags.CHUTE)
+    //     {
+    //         GameObject.Find("BoxOrder").GetComponent<BoxOrderController>().CheckBox(gameObject.GetComponent<BoxController>());
+
+    //     }
+    // }
+
+    protected virtual void Change_Pattern(int index, bool sticker, string spriteApply)
+    {
+        
+        Debug.Log("####: " + GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply).ToString());
+        pattern[index].sprite = GameObject.Find("SpriteContainer").GetComponent<BoxSpriteModifiers>().Apply_Sprite(sticker, spriteApply);
         pattern[index].enabled = true;
 
-    } 
+    }
 
-    void Update_Attributes(string apply){
+    void Update_Attributes(string spriteApply)
+    {
 
         Debug.Log("###Updating Attribute###");
-        Debug.Log(apply);
+        Debug.Log(spriteApply);
 
         List<string> keys = new List<string>(attributes.Keys);
 
-        foreach(string key in keys){
+        foreach (string key in keys)
+        {
 
-            if(key == apply){
+            attributes[key] = false;
+
+            if (key == spriteApply)
+            {
 
                 attributes[key] = true;
 
             }
-            else{
-
-                attributes[key] = false;
-
-            }
 
         }
 
     }
-
 }
