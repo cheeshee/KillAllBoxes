@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5431600348063953149}
   - component: {fileID: 4226599184199086293}
-  - component: {fileID: 5728652686466453323}
   - component: {fileID: 6566766910771727973}
+  - component: {fileID: 7900680789412053801}
   m_Layer: 0
   m_Name: NormalBox
   m_TagString: Untagged
@@ -81,23 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5728652686466453323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991539164642455653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5f1079902a1ce4581322635151160f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fields:
-  - fragile
-  - heavy
-  - bubble
-  - wrapping
 --- !u!61 &6566766910771727973
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,3 +107,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &7900680789412053801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991539164642455653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1079902a1ce4581322635151160f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields:
+  - blueSticker
+  - redSticker
+  - whiteSticker
+  - bubbleWrap
+  pattern: []
