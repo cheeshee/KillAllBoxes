@@ -66,6 +66,8 @@ public class BoxController : MonoBehaviour
 
         foreach(KeyValuePair<string, bool> attrib in attributes){
 
+            attributes[attrib.Key] = false;
+
             if(attrib.Key == apply){
 
                 attributes[attrib.Key] = true;
