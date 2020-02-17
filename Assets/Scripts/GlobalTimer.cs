@@ -13,6 +13,14 @@ public class GlobalTimer : MonoBehaviour
     public Text timeText;
     public Image panelBackground;
 
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            LoadMenuScene();
+        }
+    }
     void FixedUpdate(){
 
         timer -= Time.deltaTime;
